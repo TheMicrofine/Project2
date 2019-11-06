@@ -130,7 +130,11 @@
     <ClCompile Include="crypt_blowfish.c" />
     <ClCompile Include="crypt_gensalt.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Project2.pb.cc" />
     <ClCompile Include="wrapper.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Project2.pb.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

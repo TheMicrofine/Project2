@@ -5,12 +5,13 @@ package Project2;
 message CreateAccountWeb {
 required int32 requestId = 1;
 required string email = 2;
-required string plaint32extPassword = 3;
+required string plaintextPassword = 3;
+required string userId = 4;
 }
 
 message CreateAccountWebSuccess {
 required int32 requestId = 1;
-required int32 userId = 2;
+required string userId = 2;
 }
 
 message CreateAccountWebFailure {
@@ -19,19 +20,19 @@ required int32 requestId = 1;
 	enum Reason {
 	ACCOUNT_ALREADY_EXISTS = 0;
 	INVALID_PASSWORD = 1;
-	int32ERNAL_SERVER_ERROR = 2;
+	INTERNAL_SERVER_ERROR = 2;
 	}
 }
 
 message AuthenticateWeb {
 required int32 requestId = 1;
 required string email = 2;
-required string plaint32extPassword = 3;
+required string plaintextPassword = 3;
 }
 
 message AuthenticateWebSuccess {
 required int32 requestId = 1;
-required int32 userId = 2;
+required string userId = 2;
 required string creationDate = 3;
 }
 
@@ -40,6 +41,6 @@ required int32 requestId = 1;
 
 	enum Reason {
 	INVALID_CREDENTIALS = 0;
-	int32ERNAL_SERVER_ERROR = 1;
+	INTERNAL_SERVER_ERROR = 1;
 	}
 }

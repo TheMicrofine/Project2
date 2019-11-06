@@ -121,10 +121,12 @@
   <ItemGroup>
     <ClCompile Include="Buffer_Server.cpp" />
     <ClCompile Include="Main_Server.cpp" />
+    <ClCompile Include="Project2.pb.cc" />
     <ClCompile Include="Protocol_Server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer_Server.h" />
+    <ClInclude Include="Project2.pb.h" />
     <ClInclude Include="Protocol_Server.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

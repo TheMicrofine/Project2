@@ -12,6 +12,7 @@ public:
 		char salt[BCRYPT_HASHSIZE];
 		char hash[BCRYPT_HASHSIZE];
 		int ret;
+		TODO: Separate the salt and hash generation into two functions to be able to store in database.
 		ret = bcrypt_gensalt(workload, salt);
 		if (ret != 0)throw std::runtime_error{ "bcrypt: can not generate salt" };
 		ret = bcrypt_hashpw(password.c_str(), salt, hash);

@@ -19,6 +19,9 @@
     <Filter Include="Protocol">
       <UniqueIdentifier>{f59d1eb5-04a5-4509-b6f1-b561444f2160}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Proto Files">
+      <UniqueIdentifier>{5cb79a07-2909-496a-8854-a0b27b4728c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main_Server.cpp">
@@ -30,6 +33,9 @@
     <ClCompile Include="Protocol_Server.cpp">
       <Filter>Protocol</Filter>
     </ClCompile>
+    <ClCompile Include="Project2.pb.cc">
+      <Filter>Proto Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer_Server.h">
@@ -37,6 +43,9 @@
     </ClInclude>
     <ClInclude Include="Protocol_Server.h">
       <Filter>Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="Project2.pb.h">
+      <Filter>Proto Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -88,11 +88,11 @@ namespace Project2 {
 enum CreateAccountWebFailure_Reason : int {
   CreateAccountWebFailure_Reason_ACCOUNT_ALREADY_EXISTS = 0,
   CreateAccountWebFailure_Reason_INVALID_PASSWORD = 1,
-  CreateAccountWebFailure_Reason_int32ERNAL_SERVER_ERROR = 2
+  CreateAccountWebFailure_Reason_INTERNAL_SERVER_ERROR = 2
 };
 bool CreateAccountWebFailure_Reason_IsValid(int value);
 constexpr CreateAccountWebFailure_Reason CreateAccountWebFailure_Reason_Reason_MIN = CreateAccountWebFailure_Reason_ACCOUNT_ALREADY_EXISTS;
-constexpr CreateAccountWebFailure_Reason CreateAccountWebFailure_Reason_Reason_MAX = CreateAccountWebFailure_Reason_int32ERNAL_SERVER_ERROR;
+constexpr CreateAccountWebFailure_Reason CreateAccountWebFailure_Reason_Reason_MAX = CreateAccountWebFailure_Reason_INTERNAL_SERVER_ERROR;
 constexpr int CreateAccountWebFailure_Reason_Reason_ARRAYSIZE = CreateAccountWebFailure_Reason_Reason_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* CreateAccountWebFailure_Reason_descriptor();
@@ -111,11 +111,11 @@ inline bool CreateAccountWebFailure_Reason_Parse(
 }
 enum AuthenticateWebFailure_Reason : int {
   AuthenticateWebFailure_Reason_INVALID_CREDENTIALS = 0,
-  AuthenticateWebFailure_Reason_int32ERNAL_SERVER_ERROR = 1
+  AuthenticateWebFailure_Reason_INTERNAL_SERVER_ERROR = 1
 };
 bool AuthenticateWebFailure_Reason_IsValid(int value);
 constexpr AuthenticateWebFailure_Reason AuthenticateWebFailure_Reason_Reason_MIN = AuthenticateWebFailure_Reason_INVALID_CREDENTIALS;
-constexpr AuthenticateWebFailure_Reason AuthenticateWebFailure_Reason_Reason_MAX = AuthenticateWebFailure_Reason_int32ERNAL_SERVER_ERROR;
+constexpr AuthenticateWebFailure_Reason AuthenticateWebFailure_Reason_Reason_MAX = AuthenticateWebFailure_Reason_INTERNAL_SERVER_ERROR;
 constexpr int AuthenticateWebFailure_Reason_Reason_ARRAYSIZE = AuthenticateWebFailure_Reason_Reason_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* AuthenticateWebFailure_Reason_descriptor();
@@ -248,7 +248,8 @@ class CreateAccountWeb :
 
   enum : int {
     kEmailFieldNumber = 2,
-    kPlaint32ExtPasswordFieldNumber = 3,
+    kPlaintextPasswordFieldNumber = 3,
+    kUserIdFieldNumber = 4,
     kRequestIdFieldNumber = 1,
   };
   // required string email = 2;
@@ -271,24 +272,44 @@ class CreateAccountWeb :
   std::string* _internal_mutable_email();
   public:
 
-  // required string plaint32extPassword = 3;
-  bool has_plaint32extpassword() const;
+  // required string plaintextPassword = 3;
+  bool has_plaintextpassword() const;
   private:
-  bool _internal_has_plaint32extpassword() const;
+  bool _internal_has_plaintextpassword() const;
   public:
-  void clear_plaint32extpassword();
-  const std::string& plaint32extpassword() const;
-  void set_plaint32extpassword(const std::string& value);
-  void set_plaint32extpassword(std::string&& value);
-  void set_plaint32extpassword(const char* value);
-  void set_plaint32extpassword(const char* value, size_t size);
-  std::string* mutable_plaint32extpassword();
-  std::string* release_plaint32extpassword();
-  void set_allocated_plaint32extpassword(std::string* plaint32extpassword);
+  void clear_plaintextpassword();
+  const std::string& plaintextpassword() const;
+  void set_plaintextpassword(const std::string& value);
+  void set_plaintextpassword(std::string&& value);
+  void set_plaintextpassword(const char* value);
+  void set_plaintextpassword(const char* value, size_t size);
+  std::string* mutable_plaintextpassword();
+  std::string* release_plaintextpassword();
+  void set_allocated_plaintextpassword(std::string* plaintextpassword);
   private:
-  const std::string& _internal_plaint32extpassword() const;
-  void _internal_set_plaint32extpassword(const std::string& value);
-  std::string* _internal_mutable_plaint32extpassword();
+  const std::string& _internal_plaintextpassword() const;
+  void _internal_set_plaintextpassword(const std::string& value);
+  std::string* _internal_mutable_plaintextpassword();
+  public:
+
+  // required string userId = 4;
+  bool has_userid() const;
+  private:
+  bool _internal_has_userid() const;
+  public:
+  void clear_userid();
+  const std::string& userid() const;
+  void set_userid(const std::string& value);
+  void set_userid(std::string&& value);
+  void set_userid(const char* value);
+  void set_userid(const char* value, size_t size);
+  std::string* mutable_userid();
+  std::string* release_userid();
+  void set_allocated_userid(std::string* userid);
+  private:
+  const std::string& _internal_userid() const;
+  void _internal_set_userid(const std::string& value);
+  std::string* _internal_mutable_userid();
   public:
 
   // required int32 requestId = 1;
@@ -315,7 +336,8 @@ class CreateAccountWeb :
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr email_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr plaint32extpassword_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr plaintextpassword_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr userid_;
   ::PROTOBUF_NAMESPACE_ID::int32 requestid_;
   friend struct ::TableStruct_Project2_2eproto;
 };
@@ -434,9 +456,29 @@ class CreateAccountWebSuccess :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kRequestIdFieldNumber = 1,
     kUserIdFieldNumber = 2,
+    kRequestIdFieldNumber = 1,
   };
+  // required string userId = 2;
+  bool has_userid() const;
+  private:
+  bool _internal_has_userid() const;
+  public:
+  void clear_userid();
+  const std::string& userid() const;
+  void set_userid(const std::string& value);
+  void set_userid(std::string&& value);
+  void set_userid(const char* value);
+  void set_userid(const char* value, size_t size);
+  std::string* mutable_userid();
+  std::string* release_userid();
+  void set_allocated_userid(std::string* userid);
+  private:
+  const std::string& _internal_userid() const;
+  void _internal_set_userid(const std::string& value);
+  std::string* _internal_mutable_userid();
+  public:
+
   // required int32 requestId = 1;
   bool has_requestid() const;
   private:
@@ -450,19 +492,6 @@ class CreateAccountWebSuccess :
   void _internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // required int32 userId = 2;
-  bool has_userid() const;
-  private:
-  bool _internal_has_userid() const;
-  public:
-  void clear_userid();
-  ::PROTOBUF_NAMESPACE_ID::int32 userid() const;
-  void set_userid(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_userid() const;
-  void _internal_set_userid(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
   // @@protoc_insertion_point(class_scope:Project2.CreateAccountWebSuccess)
  private:
   class _Internal;
@@ -473,8 +502,8 @@ class CreateAccountWebSuccess :
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr userid_;
   ::PROTOBUF_NAMESPACE_ID::int32 requestid_;
-  ::PROTOBUF_NAMESPACE_ID::int32 userid_;
   friend struct ::TableStruct_Project2_2eproto;
 };
 // -------------------------------------------------------------------
@@ -594,8 +623,8 @@ class CreateAccountWebFailure :
     CreateAccountWebFailure_Reason_ACCOUNT_ALREADY_EXISTS;
   static constexpr Reason INVALID_PASSWORD =
     CreateAccountWebFailure_Reason_INVALID_PASSWORD;
-  static constexpr Reason int32ERNAL_SERVER_ERROR =
-    CreateAccountWebFailure_Reason_int32ERNAL_SERVER_ERROR;
+  static constexpr Reason INTERNAL_SERVER_ERROR =
+    CreateAccountWebFailure_Reason_INTERNAL_SERVER_ERROR;
   static inline bool Reason_IsValid(int value) {
     return CreateAccountWebFailure_Reason_IsValid(value);
   }
@@ -765,7 +794,7 @@ class AuthenticateWeb :
 
   enum : int {
     kEmailFieldNumber = 2,
-    kPlaint32ExtPasswordFieldNumber = 3,
+    kPlaintextPasswordFieldNumber = 3,
     kRequestIdFieldNumber = 1,
   };
   // required string email = 2;
@@ -788,24 +817,24 @@ class AuthenticateWeb :
   std::string* _internal_mutable_email();
   public:
 
-  // required string plaint32extPassword = 3;
-  bool has_plaint32extpassword() const;
+  // required string plaintextPassword = 3;
+  bool has_plaintextpassword() const;
   private:
-  bool _internal_has_plaint32extpassword() const;
+  bool _internal_has_plaintextpassword() const;
   public:
-  void clear_plaint32extpassword();
-  const std::string& plaint32extpassword() const;
-  void set_plaint32extpassword(const std::string& value);
-  void set_plaint32extpassword(std::string&& value);
-  void set_plaint32extpassword(const char* value);
-  void set_plaint32extpassword(const char* value, size_t size);
-  std::string* mutable_plaint32extpassword();
-  std::string* release_plaint32extpassword();
-  void set_allocated_plaint32extpassword(std::string* plaint32extpassword);
+  void clear_plaintextpassword();
+  const std::string& plaintextpassword() const;
+  void set_plaintextpassword(const std::string& value);
+  void set_plaintextpassword(std::string&& value);
+  void set_plaintextpassword(const char* value);
+  void set_plaintextpassword(const char* value, size_t size);
+  std::string* mutable_plaintextpassword();
+  std::string* release_plaintextpassword();
+  void set_allocated_plaintextpassword(std::string* plaintextpassword);
   private:
-  const std::string& _internal_plaint32extpassword() const;
-  void _internal_set_plaint32extpassword(const std::string& value);
-  std::string* _internal_mutable_plaint32extpassword();
+  const std::string& _internal_plaintextpassword() const;
+  void _internal_set_plaintextpassword(const std::string& value);
+  std::string* _internal_mutable_plaintextpassword();
   public:
 
   // required int32 requestId = 1;
@@ -832,7 +861,7 @@ class AuthenticateWeb :
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr email_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr plaint32extpassword_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr plaintextpassword_;
   ::PROTOBUF_NAMESPACE_ID::int32 requestid_;
   friend struct ::TableStruct_Project2_2eproto;
 };
@@ -951,10 +980,30 @@ class AuthenticateWebSuccess :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kUserIdFieldNumber = 2,
     kCreationDateFieldNumber = 3,
     kRequestIdFieldNumber = 1,
-    kUserIdFieldNumber = 2,
   };
+  // required string userId = 2;
+  bool has_userid() const;
+  private:
+  bool _internal_has_userid() const;
+  public:
+  void clear_userid();
+  const std::string& userid() const;
+  void set_userid(const std::string& value);
+  void set_userid(std::string&& value);
+  void set_userid(const char* value);
+  void set_userid(const char* value, size_t size);
+  std::string* mutable_userid();
+  std::string* release_userid();
+  void set_allocated_userid(std::string* userid);
+  private:
+  const std::string& _internal_userid() const;
+  void _internal_set_userid(const std::string& value);
+  std::string* _internal_mutable_userid();
+  public:
+
   // required string creationDate = 3;
   bool has_creationdate() const;
   private:
@@ -988,19 +1037,6 @@ class AuthenticateWebSuccess :
   void _internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // required int32 userId = 2;
-  bool has_userid() const;
-  private:
-  bool _internal_has_userid() const;
-  public:
-  void clear_userid();
-  ::PROTOBUF_NAMESPACE_ID::int32 userid() const;
-  void set_userid(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_userid() const;
-  void _internal_set_userid(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
   // @@protoc_insertion_point(class_scope:Project2.AuthenticateWebSuccess)
  private:
   class _Internal;
@@ -1011,9 +1047,9 @@ class AuthenticateWebSuccess :
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr userid_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr creationdate_;
   ::PROTOBUF_NAMESPACE_ID::int32 requestid_;
-  ::PROTOBUF_NAMESPACE_ID::int32 userid_;
   friend struct ::TableStruct_Project2_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1131,8 +1167,8 @@ class AuthenticateWebFailure :
   typedef AuthenticateWebFailure_Reason Reason;
   static constexpr Reason INVALID_CREDENTIALS =
     AuthenticateWebFailure_Reason_INVALID_CREDENTIALS;
-  static constexpr Reason int32ERNAL_SERVER_ERROR =
-    AuthenticateWebFailure_Reason_int32ERNAL_SERVER_ERROR;
+  static constexpr Reason INTERNAL_SERVER_ERROR =
+    AuthenticateWebFailure_Reason_INTERNAL_SERVER_ERROR;
   static inline bool Reason_IsValid(int value) {
     return AuthenticateWebFailure_Reason_IsValid(value);
   }
@@ -1199,7 +1235,7 @@ class AuthenticateWebFailure :
 
 // required int32 requestId = 1;
 inline bool CreateAccountWeb::_internal_has_requestid() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
+  bool value = (_has_bits_[0] & 0x00000008u) != 0;
   return value;
 }
 inline bool CreateAccountWeb::has_requestid() const {
@@ -1207,7 +1243,7 @@ inline bool CreateAccountWeb::has_requestid() const {
 }
 inline void CreateAccountWeb::clear_requestid() {
   requestid_ = 0;
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::int32 CreateAccountWeb::_internal_requestid() const {
   return requestid_;
@@ -1217,7 +1253,7 @@ inline ::PROTOBUF_NAMESPACE_ID::int32 CreateAccountWeb::requestid() const {
   return _internal_requestid();
 }
 inline void CreateAccountWeb::_internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
   requestid_ = value;
 }
 inline void CreateAccountWeb::set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
@@ -1296,75 +1332,146 @@ inline void CreateAccountWeb::set_allocated_email(std::string* email) {
   // @@protoc_insertion_point(field_set_allocated:Project2.CreateAccountWeb.email)
 }
 
-// required string plaint32extPassword = 3;
-inline bool CreateAccountWeb::_internal_has_plaint32extpassword() const {
+// required string plaintextPassword = 3;
+inline bool CreateAccountWeb::_internal_has_plaintextpassword() const {
   bool value = (_has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
-inline bool CreateAccountWeb::has_plaint32extpassword() const {
-  return _internal_has_plaint32extpassword();
+inline bool CreateAccountWeb::has_plaintextpassword() const {
+  return _internal_has_plaintextpassword();
 }
-inline void CreateAccountWeb::clear_plaint32extpassword() {
-  plaint32extpassword_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+inline void CreateAccountWeb::clear_plaintextpassword() {
+  plaintextpassword_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   _has_bits_[0] &= ~0x00000002u;
 }
-inline const std::string& CreateAccountWeb::plaint32extpassword() const {
-  // @@protoc_insertion_point(field_get:Project2.CreateAccountWeb.plaint32extPassword)
-  return _internal_plaint32extpassword();
+inline const std::string& CreateAccountWeb::plaintextpassword() const {
+  // @@protoc_insertion_point(field_get:Project2.CreateAccountWeb.plaintextPassword)
+  return _internal_plaintextpassword();
 }
-inline void CreateAccountWeb::set_plaint32extpassword(const std::string& value) {
-  _internal_set_plaint32extpassword(value);
-  // @@protoc_insertion_point(field_set:Project2.CreateAccountWeb.plaint32extPassword)
+inline void CreateAccountWeb::set_plaintextpassword(const std::string& value) {
+  _internal_set_plaintextpassword(value);
+  // @@protoc_insertion_point(field_set:Project2.CreateAccountWeb.plaintextPassword)
 }
-inline std::string* CreateAccountWeb::mutable_plaint32extpassword() {
-  // @@protoc_insertion_point(field_mutable:Project2.CreateAccountWeb.plaint32extPassword)
-  return _internal_mutable_plaint32extpassword();
+inline std::string* CreateAccountWeb::mutable_plaintextpassword() {
+  // @@protoc_insertion_point(field_mutable:Project2.CreateAccountWeb.plaintextPassword)
+  return _internal_mutable_plaintextpassword();
 }
-inline const std::string& CreateAccountWeb::_internal_plaint32extpassword() const {
-  return plaint32extpassword_.GetNoArena();
+inline const std::string& CreateAccountWeb::_internal_plaintextpassword() const {
+  return plaintextpassword_.GetNoArena();
 }
-inline void CreateAccountWeb::_internal_set_plaint32extpassword(const std::string& value) {
+inline void CreateAccountWeb::_internal_set_plaintextpassword(const std::string& value) {
   _has_bits_[0] |= 0x00000002u;
-  plaint32extpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  plaintextpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
 }
-inline void CreateAccountWeb::set_plaint32extpassword(std::string&& value) {
+inline void CreateAccountWeb::set_plaintextpassword(std::string&& value) {
   _has_bits_[0] |= 0x00000002u;
-  plaint32extpassword_.SetNoArena(
+  plaintextpassword_.SetNoArena(
     &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:Project2.CreateAccountWeb.plaint32extPassword)
+  // @@protoc_insertion_point(field_set_rvalue:Project2.CreateAccountWeb.plaintextPassword)
 }
-inline void CreateAccountWeb::set_plaint32extpassword(const char* value) {
+inline void CreateAccountWeb::set_plaintextpassword(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   _has_bits_[0] |= 0x00000002u;
-  plaint32extpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:Project2.CreateAccountWeb.plaint32extPassword)
+  plaintextpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Project2.CreateAccountWeb.plaintextPassword)
 }
-inline void CreateAccountWeb::set_plaint32extpassword(const char* value, size_t size) {
+inline void CreateAccountWeb::set_plaintextpassword(const char* value, size_t size) {
   _has_bits_[0] |= 0x00000002u;
-  plaint32extpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+  plaintextpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:Project2.CreateAccountWeb.plaint32extPassword)
+  // @@protoc_insertion_point(field_set_pointer:Project2.CreateAccountWeb.plaintextPassword)
 }
-inline std::string* CreateAccountWeb::_internal_mutable_plaint32extpassword() {
+inline std::string* CreateAccountWeb::_internal_mutable_plaintextpassword() {
   _has_bits_[0] |= 0x00000002u;
-  return plaint32extpassword_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  return plaintextpassword_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline std::string* CreateAccountWeb::release_plaint32extpassword() {
-  // @@protoc_insertion_point(field_release:Project2.CreateAccountWeb.plaint32extPassword)
-  if (!has_plaint32extpassword()) {
+inline std::string* CreateAccountWeb::release_plaintextpassword() {
+  // @@protoc_insertion_point(field_release:Project2.CreateAccountWeb.plaintextPassword)
+  if (!has_plaintextpassword()) {
     return nullptr;
   }
   _has_bits_[0] &= ~0x00000002u;
-  return plaint32extpassword_.ReleaseNonDefaultNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  return plaintextpassword_.ReleaseNonDefaultNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline void CreateAccountWeb::set_allocated_plaint32extpassword(std::string* plaint32extpassword) {
-  if (plaint32extpassword != nullptr) {
+inline void CreateAccountWeb::set_allocated_plaintextpassword(std::string* plaintextpassword) {
+  if (plaintextpassword != nullptr) {
     _has_bits_[0] |= 0x00000002u;
   } else {
     _has_bits_[0] &= ~0x00000002u;
   }
-  plaint32extpassword_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), plaint32extpassword);
-  // @@protoc_insertion_point(field_set_allocated:Project2.CreateAccountWeb.plaint32extPassword)
+  plaintextpassword_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), plaintextpassword);
+  // @@protoc_insertion_point(field_set_allocated:Project2.CreateAccountWeb.plaintextPassword)
+}
+
+// required string userId = 4;
+inline bool CreateAccountWeb::_internal_has_userid() const {
+  bool value = (_has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline bool CreateAccountWeb::has_userid() const {
+  return _internal_has_userid();
+}
+inline void CreateAccountWeb::clear_userid() {
+  userid_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline const std::string& CreateAccountWeb::userid() const {
+  // @@protoc_insertion_point(field_get:Project2.CreateAccountWeb.userId)
+  return _internal_userid();
+}
+inline void CreateAccountWeb::set_userid(const std::string& value) {
+  _internal_set_userid(value);
+  // @@protoc_insertion_point(field_set:Project2.CreateAccountWeb.userId)
+}
+inline std::string* CreateAccountWeb::mutable_userid() {
+  // @@protoc_insertion_point(field_mutable:Project2.CreateAccountWeb.userId)
+  return _internal_mutable_userid();
+}
+inline const std::string& CreateAccountWeb::_internal_userid() const {
+  return userid_.GetNoArena();
+}
+inline void CreateAccountWeb::_internal_set_userid(const std::string& value) {
+  _has_bits_[0] |= 0x00000004u;
+  userid_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void CreateAccountWeb::set_userid(std::string&& value) {
+  _has_bits_[0] |= 0x00000004u;
+  userid_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:Project2.CreateAccountWeb.userId)
+}
+inline void CreateAccountWeb::set_userid(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  _has_bits_[0] |= 0x00000004u;
+  userid_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Project2.CreateAccountWeb.userId)
+}
+inline void CreateAccountWeb::set_userid(const char* value, size_t size) {
+  _has_bits_[0] |= 0x00000004u;
+  userid_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:Project2.CreateAccountWeb.userId)
+}
+inline std::string* CreateAccountWeb::_internal_mutable_userid() {
+  _has_bits_[0] |= 0x00000004u;
+  return userid_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* CreateAccountWeb::release_userid() {
+  // @@protoc_insertion_point(field_release:Project2.CreateAccountWeb.userId)
+  if (!has_userid()) {
+    return nullptr;
+  }
+  _has_bits_[0] &= ~0x00000004u;
+  return userid_.ReleaseNonDefaultNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void CreateAccountWeb::set_allocated_userid(std::string* userid) {
+  if (userid != nullptr) {
+    _has_bits_[0] |= 0x00000004u;
+  } else {
+    _has_bits_[0] &= ~0x00000004u;
+  }
+  userid_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), userid);
+  // @@protoc_insertion_point(field_set_allocated:Project2.CreateAccountWeb.userId)
 }
 
 // -------------------------------------------------------------------
@@ -1373,7 +1480,7 @@ inline void CreateAccountWeb::set_allocated_plaint32extpassword(std::string* pla
 
 // required int32 requestId = 1;
 inline bool CreateAccountWebSuccess::_internal_has_requestid() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
+  bool value = (_has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
 inline bool CreateAccountWebSuccess::has_requestid() const {
@@ -1381,7 +1488,7 @@ inline bool CreateAccountWebSuccess::has_requestid() const {
 }
 inline void CreateAccountWebSuccess::clear_requestid() {
   requestid_ = 0;
-  _has_bits_[0] &= ~0x00000001u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::int32 CreateAccountWebSuccess::_internal_requestid() const {
   return requestid_;
@@ -1391,7 +1498,7 @@ inline ::PROTOBUF_NAMESPACE_ID::int32 CreateAccountWebSuccess::requestid() const
   return _internal_requestid();
 }
 inline void CreateAccountWebSuccess::_internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000001u;
+  _has_bits_[0] |= 0x00000002u;
   requestid_ = value;
 }
 inline void CreateAccountWebSuccess::set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
@@ -1399,32 +1506,75 @@ inline void CreateAccountWebSuccess::set_requestid(::PROTOBUF_NAMESPACE_ID::int3
   // @@protoc_insertion_point(field_set:Project2.CreateAccountWebSuccess.requestId)
 }
 
-// required int32 userId = 2;
+// required string userId = 2;
 inline bool CreateAccountWebSuccess::_internal_has_userid() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
+  bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
 inline bool CreateAccountWebSuccess::has_userid() const {
   return _internal_has_userid();
 }
 inline void CreateAccountWebSuccess::clear_userid() {
-  userid_ = 0;
-  _has_bits_[0] &= ~0x00000002u;
+  userid_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 CreateAccountWebSuccess::_internal_userid() const {
-  return userid_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 CreateAccountWebSuccess::userid() const {
+inline const std::string& CreateAccountWebSuccess::userid() const {
   // @@protoc_insertion_point(field_get:Project2.CreateAccountWebSuccess.userId)
   return _internal_userid();
 }
-inline void CreateAccountWebSuccess::_internal_set_userid(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000002u;
-  userid_ = value;
-}
-inline void CreateAccountWebSuccess::set_userid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void CreateAccountWebSuccess::set_userid(const std::string& value) {
   _internal_set_userid(value);
   // @@protoc_insertion_point(field_set:Project2.CreateAccountWebSuccess.userId)
+}
+inline std::string* CreateAccountWebSuccess::mutable_userid() {
+  // @@protoc_insertion_point(field_mutable:Project2.CreateAccountWebSuccess.userId)
+  return _internal_mutable_userid();
+}
+inline const std::string& CreateAccountWebSuccess::_internal_userid() const {
+  return userid_.GetNoArena();
+}
+inline void CreateAccountWebSuccess::_internal_set_userid(const std::string& value) {
+  _has_bits_[0] |= 0x00000001u;
+  userid_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void CreateAccountWebSuccess::set_userid(std::string&& value) {
+  _has_bits_[0] |= 0x00000001u;
+  userid_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:Project2.CreateAccountWebSuccess.userId)
+}
+inline void CreateAccountWebSuccess::set_userid(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  _has_bits_[0] |= 0x00000001u;
+  userid_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Project2.CreateAccountWebSuccess.userId)
+}
+inline void CreateAccountWebSuccess::set_userid(const char* value, size_t size) {
+  _has_bits_[0] |= 0x00000001u;
+  userid_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:Project2.CreateAccountWebSuccess.userId)
+}
+inline std::string* CreateAccountWebSuccess::_internal_mutable_userid() {
+  _has_bits_[0] |= 0x00000001u;
+  return userid_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* CreateAccountWebSuccess::release_userid() {
+  // @@protoc_insertion_point(field_release:Project2.CreateAccountWebSuccess.userId)
+  if (!has_userid()) {
+    return nullptr;
+  }
+  _has_bits_[0] &= ~0x00000001u;
+  return userid_.ReleaseNonDefaultNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void CreateAccountWebSuccess::set_allocated_userid(std::string* userid) {
+  if (userid != nullptr) {
+    _has_bits_[0] |= 0x00000001u;
+  } else {
+    _has_bits_[0] &= ~0x00000001u;
+  }
+  userid_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), userid);
+  // @@protoc_insertion_point(field_set_allocated:Project2.CreateAccountWebSuccess.userId)
 }
 
 // -------------------------------------------------------------------
@@ -1562,75 +1712,75 @@ inline void AuthenticateWeb::set_allocated_email(std::string* email) {
   // @@protoc_insertion_point(field_set_allocated:Project2.AuthenticateWeb.email)
 }
 
-// required string plaint32extPassword = 3;
-inline bool AuthenticateWeb::_internal_has_plaint32extpassword() const {
+// required string plaintextPassword = 3;
+inline bool AuthenticateWeb::_internal_has_plaintextpassword() const {
   bool value = (_has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
-inline bool AuthenticateWeb::has_plaint32extpassword() const {
-  return _internal_has_plaint32extpassword();
+inline bool AuthenticateWeb::has_plaintextpassword() const {
+  return _internal_has_plaintextpassword();
 }
-inline void AuthenticateWeb::clear_plaint32extpassword() {
-  plaint32extpassword_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+inline void AuthenticateWeb::clear_plaintextpassword() {
+  plaintextpassword_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   _has_bits_[0] &= ~0x00000002u;
 }
-inline const std::string& AuthenticateWeb::plaint32extpassword() const {
-  // @@protoc_insertion_point(field_get:Project2.AuthenticateWeb.plaint32extPassword)
-  return _internal_plaint32extpassword();
+inline const std::string& AuthenticateWeb::plaintextpassword() const {
+  // @@protoc_insertion_point(field_get:Project2.AuthenticateWeb.plaintextPassword)
+  return _internal_plaintextpassword();
 }
-inline void AuthenticateWeb::set_plaint32extpassword(const std::string& value) {
-  _internal_set_plaint32extpassword(value);
-  // @@protoc_insertion_point(field_set:Project2.AuthenticateWeb.plaint32extPassword)
+inline void AuthenticateWeb::set_plaintextpassword(const std::string& value) {
+  _internal_set_plaintextpassword(value);
+  // @@protoc_insertion_point(field_set:Project2.AuthenticateWeb.plaintextPassword)
 }
-inline std::string* AuthenticateWeb::mutable_plaint32extpassword() {
-  // @@protoc_insertion_point(field_mutable:Project2.AuthenticateWeb.plaint32extPassword)
-  return _internal_mutable_plaint32extpassword();
+inline std::string* AuthenticateWeb::mutable_plaintextpassword() {
+  // @@protoc_insertion_point(field_mutable:Project2.AuthenticateWeb.plaintextPassword)
+  return _internal_mutable_plaintextpassword();
 }
-inline const std::string& AuthenticateWeb::_internal_plaint32extpassword() const {
-  return plaint32extpassword_.GetNoArena();
+inline const std::string& AuthenticateWeb::_internal_plaintextpassword() const {
+  return plaintextpassword_.GetNoArena();
 }
-inline void AuthenticateWeb::_internal_set_plaint32extpassword(const std::string& value) {
+inline void AuthenticateWeb::_internal_set_plaintextpassword(const std::string& value) {
   _has_bits_[0] |= 0x00000002u;
-  plaint32extpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  plaintextpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
 }
-inline void AuthenticateWeb::set_plaint32extpassword(std::string&& value) {
+inline void AuthenticateWeb::set_plaintextpassword(std::string&& value) {
   _has_bits_[0] |= 0x00000002u;
-  plaint32extpassword_.SetNoArena(
+  plaintextpassword_.SetNoArena(
     &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:Project2.AuthenticateWeb.plaint32extPassword)
+  // @@protoc_insertion_point(field_set_rvalue:Project2.AuthenticateWeb.plaintextPassword)
 }
-inline void AuthenticateWeb::set_plaint32extpassword(const char* value) {
+inline void AuthenticateWeb::set_plaintextpassword(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   _has_bits_[0] |= 0x00000002u;
-  plaint32extpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:Project2.AuthenticateWeb.plaint32extPassword)
+  plaintextpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Project2.AuthenticateWeb.plaintextPassword)
 }
-inline void AuthenticateWeb::set_plaint32extpassword(const char* value, size_t size) {
+inline void AuthenticateWeb::set_plaintextpassword(const char* value, size_t size) {
   _has_bits_[0] |= 0x00000002u;
-  plaint32extpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+  plaintextpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:Project2.AuthenticateWeb.plaint32extPassword)
+  // @@protoc_insertion_point(field_set_pointer:Project2.AuthenticateWeb.plaintextPassword)
 }
-inline std::string* AuthenticateWeb::_internal_mutable_plaint32extpassword() {
+inline std::string* AuthenticateWeb::_internal_mutable_plaintextpassword() {
   _has_bits_[0] |= 0x00000002u;
-  return plaint32extpassword_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  return plaintextpassword_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline std::string* AuthenticateWeb::release_plaint32extpassword() {
-  // @@protoc_insertion_point(field_release:Project2.AuthenticateWeb.plaint32extPassword)
-  if (!has_plaint32extpassword()) {
+inline std::string* AuthenticateWeb::release_plaintextpassword() {
+  // @@protoc_insertion_point(field_release:Project2.AuthenticateWeb.plaintextPassword)
+  if (!has_plaintextpassword()) {
     return nullptr;
   }
   _has_bits_[0] &= ~0x00000002u;
-  return plaint32extpassword_.ReleaseNonDefaultNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  return plaintextpassword_.ReleaseNonDefaultNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline void AuthenticateWeb::set_allocated_plaint32extpassword(std::string* plaint32extpassword) {
-  if (plaint32extpassword != nullptr) {
+inline void AuthenticateWeb::set_allocated_plaintextpassword(std::string* plaintextpassword) {
+  if (plaintextpassword != nullptr) {
     _has_bits_[0] |= 0x00000002u;
   } else {
     _has_bits_[0] &= ~0x00000002u;
   }
-  plaint32extpassword_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), plaint32extpassword);
-  // @@protoc_insertion_point(field_set_allocated:Project2.AuthenticateWeb.plaint32extPassword)
+  plaintextpassword_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), plaintextpassword);
+  // @@protoc_insertion_point(field_set_allocated:Project2.AuthenticateWeb.plaintextPassword)
 }
 
 // -------------------------------------------------------------------
@@ -1639,7 +1789,7 @@ inline void AuthenticateWeb::set_allocated_plaint32extpassword(std::string* plai
 
 // required int32 requestId = 1;
 inline bool AuthenticateWebSuccess::_internal_has_requestid() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
+  bool value = (_has_bits_[0] & 0x00000004u) != 0;
   return value;
 }
 inline bool AuthenticateWebSuccess::has_requestid() const {
@@ -1647,7 +1797,7 @@ inline bool AuthenticateWebSuccess::has_requestid() const {
 }
 inline void AuthenticateWebSuccess::clear_requestid() {
   requestid_ = 0;
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::int32 AuthenticateWebSuccess::_internal_requestid() const {
   return requestid_;
@@ -1657,7 +1807,7 @@ inline ::PROTOBUF_NAMESPACE_ID::int32 AuthenticateWebSuccess::requestid() const 
   return _internal_requestid();
 }
 inline void AuthenticateWebSuccess::_internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
   requestid_ = value;
 }
 inline void AuthenticateWebSuccess::set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
@@ -1665,37 +1815,80 @@ inline void AuthenticateWebSuccess::set_requestid(::PROTOBUF_NAMESPACE_ID::int32
   // @@protoc_insertion_point(field_set:Project2.AuthenticateWebSuccess.requestId)
 }
 
-// required int32 userId = 2;
+// required string userId = 2;
 inline bool AuthenticateWebSuccess::_internal_has_userid() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
+  bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
 inline bool AuthenticateWebSuccess::has_userid() const {
   return _internal_has_userid();
 }
 inline void AuthenticateWebSuccess::clear_userid() {
-  userid_ = 0;
-  _has_bits_[0] &= ~0x00000004u;
+  userid_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 AuthenticateWebSuccess::_internal_userid() const {
-  return userid_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 AuthenticateWebSuccess::userid() const {
+inline const std::string& AuthenticateWebSuccess::userid() const {
   // @@protoc_insertion_point(field_get:Project2.AuthenticateWebSuccess.userId)
   return _internal_userid();
 }
-inline void AuthenticateWebSuccess::_internal_set_userid(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000004u;
-  userid_ = value;
-}
-inline void AuthenticateWebSuccess::set_userid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void AuthenticateWebSuccess::set_userid(const std::string& value) {
   _internal_set_userid(value);
   // @@protoc_insertion_point(field_set:Project2.AuthenticateWebSuccess.userId)
+}
+inline std::string* AuthenticateWebSuccess::mutable_userid() {
+  // @@protoc_insertion_point(field_mutable:Project2.AuthenticateWebSuccess.userId)
+  return _internal_mutable_userid();
+}
+inline const std::string& AuthenticateWebSuccess::_internal_userid() const {
+  return userid_.GetNoArena();
+}
+inline void AuthenticateWebSuccess::_internal_set_userid(const std::string& value) {
+  _has_bits_[0] |= 0x00000001u;
+  userid_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void AuthenticateWebSuccess::set_userid(std::string&& value) {
+  _has_bits_[0] |= 0x00000001u;
+  userid_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:Project2.AuthenticateWebSuccess.userId)
+}
+inline void AuthenticateWebSuccess::set_userid(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  _has_bits_[0] |= 0x00000001u;
+  userid_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Project2.AuthenticateWebSuccess.userId)
+}
+inline void AuthenticateWebSuccess::set_userid(const char* value, size_t size) {
+  _has_bits_[0] |= 0x00000001u;
+  userid_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:Project2.AuthenticateWebSuccess.userId)
+}
+inline std::string* AuthenticateWebSuccess::_internal_mutable_userid() {
+  _has_bits_[0] |= 0x00000001u;
+  return userid_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* AuthenticateWebSuccess::release_userid() {
+  // @@protoc_insertion_point(field_release:Project2.AuthenticateWebSuccess.userId)
+  if (!has_userid()) {
+    return nullptr;
+  }
+  _has_bits_[0] &= ~0x00000001u;
+  return userid_.ReleaseNonDefaultNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void AuthenticateWebSuccess::set_allocated_userid(std::string* userid) {
+  if (userid != nullptr) {
+    _has_bits_[0] |= 0x00000001u;
+  } else {
+    _has_bits_[0] &= ~0x00000001u;
+  }
+  userid_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), userid);
+  // @@protoc_insertion_point(field_set_allocated:Project2.AuthenticateWebSuccess.userId)
 }
 
 // required string creationDate = 3;
 inline bool AuthenticateWebSuccess::_internal_has_creationdate() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
+  bool value = (_has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
 inline bool AuthenticateWebSuccess::has_creationdate() const {
@@ -1703,7 +1896,7 @@ inline bool AuthenticateWebSuccess::has_creationdate() const {
 }
 inline void AuthenticateWebSuccess::clear_creationdate() {
   creationdate_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  _has_bits_[0] &= ~0x00000001u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& AuthenticateWebSuccess::creationdate() const {
   // @@protoc_insertion_point(field_get:Project2.AuthenticateWebSuccess.creationDate)
@@ -1721,29 +1914,29 @@ inline const std::string& AuthenticateWebSuccess::_internal_creationdate() const
   return creationdate_.GetNoArena();
 }
 inline void AuthenticateWebSuccess::_internal_set_creationdate(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
+  _has_bits_[0] |= 0x00000002u;
   creationdate_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
 }
 inline void AuthenticateWebSuccess::set_creationdate(std::string&& value) {
-  _has_bits_[0] |= 0x00000001u;
+  _has_bits_[0] |= 0x00000002u;
   creationdate_.SetNoArena(
     &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:Project2.AuthenticateWebSuccess.creationDate)
 }
 inline void AuthenticateWebSuccess::set_creationdate(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
-  _has_bits_[0] |= 0x00000001u;
+  _has_bits_[0] |= 0x00000002u;
   creationdate_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:Project2.AuthenticateWebSuccess.creationDate)
 }
 inline void AuthenticateWebSuccess::set_creationdate(const char* value, size_t size) {
-  _has_bits_[0] |= 0x00000001u;
+  _has_bits_[0] |= 0x00000002u;
   creationdate_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:Project2.AuthenticateWebSuccess.creationDate)
 }
 inline std::string* AuthenticateWebSuccess::_internal_mutable_creationdate() {
-  _has_bits_[0] |= 0x00000001u;
+  _has_bits_[0] |= 0x00000002u;
   return creationdate_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 inline std::string* AuthenticateWebSuccess::release_creationdate() {
@@ -1751,14 +1944,14 @@ inline std::string* AuthenticateWebSuccess::release_creationdate() {
   if (!has_creationdate()) {
     return nullptr;
   }
-  _has_bits_[0] &= ~0x00000001u;
+  _has_bits_[0] &= ~0x00000002u;
   return creationdate_.ReleaseNonDefaultNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 inline void AuthenticateWebSuccess::set_allocated_creationdate(std::string* creationdate) {
   if (creationdate != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
+    _has_bits_[0] |= 0x00000002u;
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    _has_bits_[0] &= ~0x00000002u;
   }
   creationdate_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), creationdate);
   // @@protoc_insertion_point(field_set_allocated:Project2.AuthenticateWebSuccess.creationDate)
