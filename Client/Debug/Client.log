@@ -1,1 +1,12 @@
-﻿  Client.vcxproj -> C:\Users\Ryan\Desktop\INFO - 6016\Projects\1\NetworkProject1\Debug\Client.exe
+﻿  Buffer_Client.cpp
+  Main_Client.cpp
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Buffer_Client.cpp(45,25): warning C4244: '=': conversion from 'short' to '_Ty', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Buffer_Client.cpp(45,25): warning C4244:         with
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Buffer_Client.cpp(45,25): warning C4244:         [
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Buffer_Client.cpp(45,25): warning C4244:             _Ty=char
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Buffer_Client.cpp(45,25): warning C4244:         ]
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Main_Client.cpp(38,31): warning C4305: 'argument': truncation from 'int' to 'u_short'
+  Protocol_Client.cpp
+  Generating Code...
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Main_Client.cpp(38,24): warning C4309: 'argument': truncation of constant value
+  Client.vcxproj -> C:\Users\Cryst\Downloads\Networking\Project2\Debug\Client.exe
