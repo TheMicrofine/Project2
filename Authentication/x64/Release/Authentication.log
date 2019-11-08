@@ -1,1 +1,49 @@
-﻿
+﻿  addressbook.pb.cc
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\addressbook.pb.cc(271,15): warning C4244: 'argument': conversion from 'google::protobuf::uint64' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\addressbook.pb.cc(536,62): warning C4244: '=': conversion from 'google::protobuf::uint64' to 'google::protobuf::int32', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\dev\include\google\protobuf\has_bits.h(73,1): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\dev\include\google\protobuf\has_bits.h(72): message : while compiling class template member function 'void google::protobuf::internal::HasBits<1>::Or(const google::protobuf::internal::HasBits<1> &)'
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\addressbook.pb.cc(291): message : see reference to function template instantiation 'void google::protobuf::internal::HasBits<1>::Or(const google::protobuf::internal::HasBits<1> &)' being compiled
+C:\Users\Cryst\Downloads\Networking\Project2\dev\include\google\protobuf\has_bits.h(83): message : see reference to class template instantiation 'google::protobuf::internal::HasBits<1>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\chrono(669): message : see reference to class template instantiation 'std::chrono::duration<double,std::ratio<1,1>>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\chrono(177): message : see reference to class template instantiation 'std::chrono::duration<__int64,std::nano>' being compiled
+  DBHelper.cpp
+  Main_Authentication.cpp
+  Project2.pb.cc
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\chrono(647): message : see reference to class template instantiation 'std::chrono::time_point<std::chrono::steady_clock,std::chrono::steady_clock::duration>' being compiled
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\Project2.pb.cc(881,5): warning C4065: switch statement contains 'default' but no 'case' labels
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\Project2.pb.cc(1599,5): warning C4065: switch statement contains 'default' but no 'case' labels
+C:\Users\Cryst\Downloads\Networking\Project2\dev\include\google\protobuf\has_bits.h(73,1): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\dev\include\google\protobuf\has_bits.h(72): message : while compiling class template member function 'void google::protobuf::internal::HasBits<1>::Or(const google::protobuf::internal::HasBits<1> &)'
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\Project2.pb.cc(412): message : see reference to function template instantiation 'void google::protobuf::internal::HasBits<1>::Or(const google::protobuf::internal::HasBits<1> &)' being compiled
+C:\Users\Cryst\Downloads\Networking\Project2\dev\include\google\protobuf\has_bits.h(83): message : see reference to class template instantiation 'google::protobuf::internal::HasBits<1>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\chrono(669): message : see reference to class template instantiation 'std::chrono::duration<double,std::ratio<1,1>>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\chrono(177): message : see reference to class template instantiation 'std::chrono::duration<__int64,std::nano>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\chrono(647): message : see reference to class template instantiation 'std::chrono::time_point<std::chrono::steady_clock,std::chrono::steady_clock::duration>' being compiled
+  bcrypt.c
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\bcrypt.c(25,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Cryst\Downloads\Networking\Project2\dev\include\bcrypt\bcrypt.h(17,1): warning C4005: 'BCRYPT_HASHSIZE': macro redefinition
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\bcrypt.c(28): message : see previous definition of 'BCRYPT_HASHSIZE'
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\bcrypt.c(46,14): warning C4013: 'close' undefined; assuming extern returning int
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\bcrypt.c(64,18): warning C4013: 'read' undefined; assuming extern returning int
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\bcrypt.c(93,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\bcrypt.c(94,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\bcrypt.c(120,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\bcrypt.c(154,24): warning C4013: 'crypt_gensalt_rn' undefined; assuming extern returning int
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\bcrypt.c(155,33): warning C4047: '=': 'char *' differs in levels of indirection from 'int'
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\bcrypt.c(114,6): warning C4101: 'fd': unreferenced local variable
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\bcrypt.c(122,12): warning C4101: 'i': unreferenced local variable
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\bcrypt.c(162,16): warning C4013: 'crypt_rn' undefined; assuming extern returning int
+  crypt_blowfish.c
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\bcrypt.c(162,53): warning C4047: '=': 'char *' differs in levels of indirection from 'int'
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\crypt_blowfish.c(54,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  crypt_gensalt.c
+  wrapper.c
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\crypt_blowfish.c(903,30): warning C4244: '=': conversion from 'unsigned long' to 'char', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\wrapper.c(44,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Cryst\Downloads\Networking\Project2\Authentication\wrapper.c(254,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 819 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Authentication.vcxproj -> C:\Users\Cryst\Downloads\Networking\Project2\x64\Release\Authentication.exe
