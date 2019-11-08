@@ -8,19 +8,23 @@
 
 class BCrypt {
 public:
-	static std::string generateHash(const std::string & password, int workload = 12) {
+	static std::string generateSalt(int workload = 12) {
 		char salt[BCRYPT_HASHSIZE];
-		char hash[BCRYPT_HASHSIZE];
 		int ret;
-		TODO: Separate the salt and hash generation into two functions to be able to store in database.
 		ret = bcrypt_gensalt(workload, salt);
 		if (ret != 0)throw std::runtime_error{ "bcrypt: can not generate salt" };
-		ret = bcrypt_hashpw(password.c_str(), salt, hash);
+		return std::string{ salt };
+	}
+
+	static std::string generateHash(const std::string& password, const std::string& salt) {
+		char hash[BCRYPT_HASHSIZE];
+		int ret;
+		ret = bcrypt_hashpw(password.c_str(), salt.c_str(), hash);
 		if (ret != 0)throw std::runtime_error{ "bcrypt: can not generate hash" };
 		return std::string{ hash };
 	}
 
-	static bool validatePassword(const std::string & password, const std::string & hash) {
+	static bool validatePassword(const std::string& password, const std::string& hash) {
 		return (bcrypt_checkpw(password.c_str(), hash.c_str()) == 0);
 	}
 };

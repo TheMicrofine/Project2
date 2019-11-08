@@ -19,14 +19,11 @@
     <Filter Include="Bcrypt">
       <UniqueIdentifier>{7a844599-5ee4-4a9e-b94d-c0075bcd94f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DBHelper">
+      <UniqueIdentifier>{b4816773-bb06-44b0-a4f9-a454e7ddc2e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Project2.pb.cc">
-      <Filter>Proto Files</Filter>
-    </ClCompile>
     <ClCompile Include="wrapper.c">
       <Filter>Bcrypt</Filter>
     </ClCompile>
@@ -39,8 +36,26 @@
     <ClCompile Include="crypt_blowfish.c">
       <Filter>Bcrypt</Filter>
     </ClCompile>
+    <ClCompile Include="Main_Authentication.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="addressbook.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DBHelper.cpp">
+      <Filter>DBHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="Project2.pb.cc">
+      <Filter>Proto Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="addressbook.pb.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DBHelper.h">
+      <Filter>DBHelper</Filter>
+    </ClInclude>
     <ClInclude Include="Project2.pb.h">
       <Filter>Proto Files</Filter>
     </ClInclude>
