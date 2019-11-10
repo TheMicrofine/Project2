@@ -144,17 +144,21 @@
   <ItemGroup>
     <ClCompile Include="addressbook.pb.cc" />
     <ClCompile Include="bcrypt.c" />
+    <ClCompile Include="Buffer_Authentication.cpp" />
     <ClCompile Include="crypt_blowfish.c" />
     <ClCompile Include="crypt_gensalt.c" />
     <ClCompile Include="DBHelper.cpp" />
     <ClCompile Include="Main_Authentication.cpp" />
     <ClCompile Include="Project2.pb.cc" />
+    <ClCompile Include="Protocol_Authentication.cpp" />
     <ClCompile Include="wrapper.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="addressbook.pb.h" />
+    <ClInclude Include="Buffer_Authentication.h" />
     <ClInclude Include="DBHelper.h" />
     <ClInclude Include="Project2.pb.h" />
+    <ClInclude Include="Protocol_Authentication.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

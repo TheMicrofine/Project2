@@ -22,6 +22,12 @@
     <Filter Include="DBHelper">
       <UniqueIdentifier>{b4816773-bb06-44b0-a4f9-a454e7ddc2e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Protocol">
+      <UniqueIdentifier>{92c6c62a-c875-4e63-bb01-21889d8a6b8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Buffer">
+      <UniqueIdentifier>{054c0e1b-f7e7-404e-a555-a1ea33fd4344}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="wrapper.c">
@@ -48,6 +54,12 @@
     <ClCompile Include="Project2.pb.cc">
       <Filter>Proto Files</Filter>
     </ClCompile>
+    <ClCompile Include="Protocol_Authentication.cpp">
+      <Filter>Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="Buffer_Authentication.cpp">
+      <Filter>Buffer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="addressbook.pb.h">
@@ -58,6 +70,12 @@
     </ClInclude>
     <ClInclude Include="Project2.pb.h">
       <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol_Authentication.h">
+      <Filter>Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="Buffer_Authentication.h">
+      <Filter>Buffer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

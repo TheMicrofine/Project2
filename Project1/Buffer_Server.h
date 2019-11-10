@@ -24,7 +24,6 @@ public:
 	char ReadChar8LE(void);
 
 private:
-
 	int mReadIndex;
 	int mWriteIndex;
 };

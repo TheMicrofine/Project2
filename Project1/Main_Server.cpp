@@ -30,7 +30,12 @@ void SendMessageToClient(SOCKET theConnection, int id, std::string message);
 void SendMessageToAllInGroup(std::string groupName, int id, std::string message);
 void SendMessageOthersInGroup(int clientIndex, std::string groupName, int id, std::string message);
 
-int main()
+SOCKET Connection;
+int commandID;
+bool run = true;
+void ClientThread();
+
+int main(void)
 {
 	//Winsock Startup
 	WSAData wsaData;
