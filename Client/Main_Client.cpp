@@ -20,6 +20,13 @@ int commandID;
 bool run = true;
 void ClientThread();
 
+std::string input;
+std::string email;
+std::string password;
+std::string userName;
+
+bool validCredentials = false;
+
 int main(void)
 {
 	//Winsock Startup
@@ -46,51 +53,88 @@ int main(void)
 
 	std::cout << "Connected!" << std::endl;
 
-	std::cout << "Enter name: ";
-	Protocol* nameProtocol = new Protocol();
-	nameProtocol->CreateBuffer(256);
-	std::string input = "";
-	std::getline(std::cin, input);
+	while (true)
+	{
+		std::cout << "Would you like to 'Login' or 'Register'?" << std::endl;
 
-	nameProtocol->messageBody.name = input.c_str();
-	nameProtocol->SendName(*nameProtocol->buffer);
+		std::getline(std::cin, input);
 
-	std::vector<char> packet = nameProtocol->buffer->mBuffer;
-	send(Connection, &packet[0], packet.size(), 0);
+		if (input == "Register")
+		{
+			std::cout << "Enter email: ";
+			std::getline(std::cin, email);
+			std::cout << "Enter password: ";
+			std::getline(std::cin, password);
+			std::cout << "Enter username: ";
+			std::getline(std::cin, userName);
+
+			Protocol* registerProtocol = new Protocol();
+			registerProtocol->CreateBuffer(256);
+			registerProtocol->messageBody.email = email.c_str();
+			registerProtocol->messageBody.password = password.c_str();
+			registerProtocol->messageBody.userName = userName.c_str();
+			registerProtocol->SendRegister(*registerProtocol->buffer);
+
+			std::vector<char> packet = registerProtocol->buffer->mBuffer;
+			send(Connection, &packet[0], packet.size(), 0);
+			break;
+		}
+		else if (input == "Login")
+		{
+			std::cout << "Enter email: ";
+			std::getline(std::cin, email);
+			std::cout << "Enter password: ";
+			std::getline(std::cin, password);
+
+			Protocol* loginProtocol = new Protocol();
+			loginProtocol->CreateBuffer(256);
+			loginProtocol->messageBody.email = email.c_str();
+			loginProtocol->messageBody.password = password.c_str();
+			loginProtocol->SendLogin(*loginProtocol->buffer);
+
+			std::vector<char> packet = loginProtocol->buffer->mBuffer;
+			send(Connection, &packet[0], packet.size(), 0);
+
+			break;
+		}
+	}
 
 	CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ClientThread, NULL, NULL, NULL); //Create a thread
 
 	while (true)
 	{
-		Protocol* messageSendProtocol = new Protocol();
-
-		std::string input = "";
-		std::getline(std::cin, input);
-		messageSendProtocol->CreateBuffer(256);
-		messageSendProtocol->messageHeader.commandId = commandID;
-
-		if (commandID == 2)
+		if (validCredentials)
 		{
-			messageSendProtocol->messageBody.roomName = input.c_str();
-			messageSendProtocol->JoinRoom(*messageSendProtocol->buffer);
-		}
-		else if (commandID == 4)
-		{
-			if (input == "LeaveRoom")
-			{
-				messageSendProtocol->LeaveRoom(*messageSendProtocol->buffer);
-			}
-			else
-			{
-				messageSendProtocol->messageBody.name = nameProtocol->messageBody.name;
-				messageSendProtocol->messageBody.message = input.c_str();
-				messageSendProtocol->SendMessages(*messageSendProtocol->buffer);
-			}
-		}
+			Protocol* messageSendProtocol = new Protocol();
 
-		std::vector<char> packet = messageSendProtocol->buffer->mBuffer;
-		send(Connection, &packet[0], packet.size(), 0);
-		Sleep(10);
+			std::string input = "";
+			std::getline(std::cin, input);
+			messageSendProtocol->CreateBuffer(256);
+			messageSendProtocol->messageHeader.commandId = commandID;
+
+			if (commandID == 2)
+			{
+				messageSendProtocol->messageBody.roomName = input.c_str();
+				messageSendProtocol->JoinRoom(*messageSendProtocol->buffer);
+			}
+			else if (commandID == 4)
+			{
+				if (input == "LeaveRoom")
+				{
+					messageSendProtocol->LeaveRoom(*messageSendProtocol->buffer);
+				}
+				else
+				{
+					messageSendProtocol->messageBody.userName = userName;
+					messageSendProtocol->messageBody.message = input.c_str();
+					messageSendProtocol->SendMessages(*messageSendProtocol->buffer);
+				}
+			}
+
+			std::vector<char> packet = messageSendProtocol->buffer->mBuffer;
+			send(Connection, &packet[0], packet.size(), 0);
+			Sleep(10);
+		}
 	}
 
 	system("pause");
@@ -112,6 +156,8 @@ void ClientThread()
 		}
 		else
 		{
+			// If header = ? validate credentials
+
 			Protocol* messageProtocol = new Protocol();
 			messageProtocol->CreateBuffer(512);
 
@@ -119,7 +165,7 @@ void ClientThread()
 			messageProtocol->ReadHeader(*messageProtocol->buffer);
 
 			messageProtocol->buffer->ResizeBuffer(messageProtocol->messageHeader.packetLength);
-			
+
 			messageProtocol->ReceiveMessage(*messageProtocol->buffer);
 			std::cout << messageProtocol->messageBody.message << std::endl;
 			commandID = messageProtocol->messageHeader.commandId;

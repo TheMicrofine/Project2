@@ -20,9 +20,6 @@ public:
 	void WriteShort16LE(short value);
 	short ReadShort16LE(void);
 
-	void WriteChar8LE(char letter);
-	char ReadChar8LE(void);
-
 private:
 	int mReadIndex;
 	int mWriteIndex;

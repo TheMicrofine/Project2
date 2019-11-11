@@ -11,7 +11,9 @@
 struct Body {
 	std::string roomName;
 	std::string message;
-	std::string name;
+	std::string userName;
+	std::string email;
+	std::string password;
 };
 
 struct Header {
@@ -27,7 +29,9 @@ public:
 	void CreateBuffer(size_t index);
 	void ReadHeader(Buffer &myBuffer);
 
-	void SendName(Buffer &myBuffer);
+	void SendRegister(Buffer& myBuffer);
+	void SendLogin(Buffer& myBuffer);
+	//void SendName(Buffer &myBuffer);
 	void JoinRoom(Buffer &myBuffer);
 	void LeaveRoom(Buffer &myBuffer);
 

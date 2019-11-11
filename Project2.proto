@@ -3,16 +3,20 @@ syntax = "proto2";
 package project2;
 
 message CreateAccount {
-required string email = 1;
-required string plaintextPassword = 2;
-required string userName = 3;
+required int32 requestId = 1;
+required string email = 2;
+required string plaintextPassword = 3;
+required string userName = 4;
 }
 
 message CreateAccountSuccess {
-required string userName = 1;
+required int32 requestId = 1;
+required string userName = 2;
 }
 
 message CreateAccountFailure {
+required int32 requestId = 1;
+
 	enum Reason {
 	ACCOUNT_ALREADY_EXISTS = 0;
 	INVALID_PASSWORD = 1;
@@ -21,16 +25,20 @@ message CreateAccountFailure {
 }
 
 message Authenticate {
-required string email = 1;
-required string plaintextPassword = 2;
+required int32 requestId = 1;
+required string email = 2;
+required string plaintextPassword = 3;
 }
 
 message AuthenticateSuccess {
-required string userName = 1;
-required string creationDate = 2;
+required int32 requestId = 1;
+required string userName = 2;
+required string creationDate = 3;
 }
 
 message AuthenticateFailure {
+required int32 requestId = 1;
+
 	enum Reason {
 	INVALID_CREDENTIALS = 0;
 	INTERNAL_SERVER_ERROR = 1;

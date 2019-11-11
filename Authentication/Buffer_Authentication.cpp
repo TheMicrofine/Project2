@@ -59,19 +59,3 @@ short Buffer::ReadShort16LE(void)
 
 	return value;
 }
-
-// Serializes the char value to the end of the buffer
-void Buffer::WriteChar8LE(char value)
-{
-	mBuffer[mWriteIndex] = value;
-	mWriteIndex += 1;
-}
-
-//Deserializes an char value at the end of the buffer
-char Buffer::ReadChar8LE(void)
-{
-	char value = mBuffer[mReadIndex];
-	mReadIndex += 1;
-
-	return value;
-}

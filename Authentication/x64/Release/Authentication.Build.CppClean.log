@@ -1,10 +1,12 @@
 c:\users\cryst\downloads\networking\project2\x64\release\authentication.ipdb
 c:\users\cryst\downloads\networking\project2\x64\release\authentication.iobj
 c:\users\cryst\downloads\networking\project2\authentication\x64\release\vc142.pdb
+c:\users\cryst\downloads\networking\project2\authentication\x64\release\protocol_authentication.obj
 c:\users\cryst\downloads\networking\project2\authentication\x64\release\project2.pb.obj
-c:\users\cryst\downloads\networking\project2\authentication\x64\release\dbhelper.obj
-c:\users\cryst\downloads\networking\project2\authentication\x64\release\addressbook.pb.obj
 c:\users\cryst\downloads\networking\project2\authentication\x64\release\main_authentication.obj
+c:\users\cryst\downloads\networking\project2\authentication\x64\release\dbhelper.obj
+c:\users\cryst\downloads\networking\project2\authentication\x64\release\buffer_authentication.obj
+c:\users\cryst\downloads\networking\project2\authentication\x64\release\addressbook.pb.obj
 c:\users\cryst\downloads\networking\project2\authentication\x64\release\wrapper.obj
 c:\users\cryst\downloads\networking\project2\authentication\x64\release\crypt_gensalt.obj
 c:\users\cryst\downloads\networking\project2\authentication\x64\release\crypt_blowfish.obj
@@ -16,5 +18,6 @@ c:\users\cryst\downloads\networking\project2\authentication\x64\release\authenti
 c:\users\cryst\downloads\networking\project2\authentication\x64\release\authentication.tlog\cl.read.1.tlog
 c:\users\cryst\downloads\networking\project2\authentication\x64\release\authentication.tlog\cl.write.1.tlog
 c:\users\cryst\downloads\networking\project2\authentication\x64\release\authentication.tlog\link.command.1.tlog
+c:\users\cryst\downloads\networking\project2\authentication\x64\release\authentication.tlog\link.delete.1.tlog
 c:\users\cryst\downloads\networking\project2\authentication\x64\release\authentication.tlog\link.read.1.tlog
 c:\users\cryst\downloads\networking\project2\authentication\x64\release\authentication.tlog\link.write.1.tlog

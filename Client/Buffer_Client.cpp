@@ -26,7 +26,7 @@ void Buffer::WriteInt32LE(int value)
 	mWriteIndex += 4;
 }
 
-//Deserializes an int value at the end of the buffer
+//Deserializes a int value at the end of the buffer
 int Buffer::ReadInt32LE(void)
 {
 	uint32_t value = mBuffer[mReadIndex];
@@ -48,7 +48,7 @@ void Buffer::WriteShort16LE(short value)
 	mWriteIndex += 2;
 }
 
-//Deserializes an short value at the end of the buffer
+//Deserializes a short value at the end of the buffer
 short Buffer::ReadShort16LE(void)
 {
 	short value = mBuffer[mReadIndex];
@@ -65,7 +65,7 @@ void Buffer::WriteChar8LE(char value)
 	mWriteIndex += 1;
 }
 
-//Deserializes an char value at the end of the buffer
+//Deserializes a char value at the end of the buffer
 char Buffer::ReadChar8LE(void)
 {
 	char value = mBuffer[mReadIndex];

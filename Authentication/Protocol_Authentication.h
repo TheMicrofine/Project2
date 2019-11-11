@@ -27,13 +27,13 @@ public:
 	void CreateBuffer(size_t index);
 	void ReadHeader(Buffer& myBuffer);
 
-	void ReceiveName(Buffer& myBuffer);
-	void JoinRoom(Buffer& myBuffer);
-	void LeaveRoom(Buffer& myBuffer);
+	//void ReceiveName(Buffer& myBuffer);
+	//void JoinRoom(Buffer& myBuffer);
+	//void LeaveRoom(Buffer& myBuffer);
 
-	void ReceiveMessage(Buffer& myBuffer);
-	void SendMessages(Buffer& myBuffer, int id);
-	void SendMessages(Buffer& myBuffer);
+	//void ReceiveMessage(Buffer& myBuffer);
+	//void SendMessages(Buffer& myBuffer, int id);
+	//void SendMessages(Buffer& myBuffer);
 
 	Header messageHeader;
 	Body messageBody;

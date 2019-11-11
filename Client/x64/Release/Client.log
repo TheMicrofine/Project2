@@ -5,23 +5,28 @@ C:\Users\Cryst\Downloads\Networking\Project2\Client\Buffer_Client.cpp(45,25): wa
 C:\Users\Cryst\Downloads\Networking\Project2\Client\Buffer_Client.cpp(45,25): warning C4244:         [
 C:\Users\Cryst\Downloads\Networking\Project2\Client\Buffer_Client.cpp(45,25): warning C4244:             _Ty=char
 C:\Users\Cryst\Downloads\Networking\Project2\Client\Buffer_Client.cpp(45,25): warning C4244:         ]
-C:\Users\Cryst\Downloads\Networking\Project2\Client\Main_Client.cpp(38,31): warning C4305: 'argument': truncation from 'int' to 'u_short'
-C:\Users\Cryst\Downloads\Networking\Project2\Client\Main_Client.cpp(38,24): warning C4309: 'argument': truncation of constant value
-C:\Users\Cryst\Downloads\Networking\Project2\Client\Main_Client.cpp(59,47): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Cryst\Downloads\Networking\Project2\Client\Main_Client.cpp(92,48): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Main_Client.cpp(45,31): warning C4305: 'argument': truncation from 'int' to 'u_short'
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Main_Client.cpp(45,24): warning C4309: 'argument': truncation of constant value
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Main_Client.cpp(79,49): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Main_Client.cpp(96,49): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Main_Client.cpp(135,49): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Protocol_Client.cpp
-C:\Users\Cryst\Downloads\Networking\Project2\Client\Main_Client.cpp(107,6): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(36,56): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(38,55): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Main_Client.cpp(151,6): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(52,56): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(54,59): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(68,56): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(89,56): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(92,55): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(99,58): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(55,56): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(62,59): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(69,59): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(83,56): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(86,56): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(93,59): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(108,56): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(111,59): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(126,56): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(147,56): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(150,59): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cryst\Downloads\Networking\Project2\Client\Protocol_Client.cpp(157,58): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Generating code
-  0 of 189 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  Previous IPDB not found, fall back to full compilation.
+  All 198 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   Client.vcxproj -> C:\Users\Cryst\Downloads\Networking\Project2\x64\Release\Client.exe

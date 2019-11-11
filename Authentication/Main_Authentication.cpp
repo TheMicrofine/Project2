@@ -237,6 +237,9 @@
 #include <vector>
 
 #include "Protocol_Authentication.h"
+#include "Project2.pb.h"
+
+using namespace project2;
 
 struct Client
 {
@@ -262,14 +265,14 @@ int main(void)
 		exit(1);
 	}
 
-	std::cout << "Starting authentication server" << std::endl;
+	std::cout << "Starting authentication server..." << std::endl;
 
 	// Socket addres info
 	SOCKADDR_IN addr;
 
 	int addrlen = sizeof(addr);
 	inet_pton(AF_INET, "127.0.0.1", &addr.sin_addr.s_addr);
-	addr.sin_port = htons(1234567);
+	addr.sin_port = htons(123456);
 	addr.sin_family = AF_INET; //IPv4 
 
 	SOCKET sListen = socket(AF_INET, SOCK_STREAM, NULL); //Creates socket to listen for new connections
@@ -283,11 +286,11 @@ int main(void)
 		newConnection = accept(sListen, (SOCKADDR*)&addr, &addrlen);
 		if (newConnection == 0)
 		{
-			std::cout << "Failed to accept the client's connection." << std::endl;
+			std::cout << "Failed to accept the chat server's connection." << std::endl;
 		}
 		else
 		{
-			std::cout << "New client connected!" << std::endl;
+			std::cout << "Chat server connected!" << std::endl;
 
 			Clients[i].Connection = newConnection;
 			lobby.push_back(clientsCounter);
@@ -315,19 +318,43 @@ void HandleClients(int index)
 		}
 		else
 		{
-			Protocol* messageProtocol = new Protocol();
-			messageProtocol->CreateBuffer(512);
+			int command = packet[0];
+			int length = packet[1];
+			std::string packetContents;
+			for (int i = 2; i <= length + 1; i++)
+			{
+				packetContents += packet[i];
+			}
 
-			messageProtocol->buffer->mBuffer = packet;
-			messageProtocol->ReadHeader(*messageProtocol->buffer);
+			// Create New Account
+			if (command == 0)
+			{
+				CreateAccount* newAccount = new CreateAccount();
+				newAccount->ParseFromString(packetContents);
+				// Check data
+				std::cout << "Email: [" << newAccount->email().c_str() << "]\nPassword: [" << newAccount->plaintextpassword().c_str() << "]\nUsername: [" << newAccount->username().c_str() << "]" << std::endl;
+			}
+			else if (command == 1)
+			{
+				Authenticate* loginAccount = new Authenticate();
+				loginAccount->ParseFromString(packetContents);
+				// Check data
+				std::cout << "Email: [" << loginAccount->email().c_str() << "]\nPassword: [" << loginAccount->plaintextpassword().c_str() << "]" << std::endl;
+			}
+		
 
+
+			//	
 			//// Create name
-			//if (messageProtocol->messageHeader.commandId == 1)
+			//if (messageProtocol->messageHeader.commandId == 0)
 			//{
-			//	messageProtocol->ReceiveName(*messageProtocol->buffer);
-			//	Clients[index].name = messageProtocol->messageBody.name;
-			//	std::string greet = "Hello [" + messageProtocol->messageBody.name + "]!\nEnter a number (1 - 3) to join a room!\n1 - Prequel Memes, 2 - Chonkers, 3 - Rare puppers";
-			//	SendMessageToClient(Clients[index].Connection, 2, greet);
+			//
+			//	
+
+			/*	messageProtocol->ReceiveName(*messageProtocol->buffer);
+				Clients[index].name = messageProtocol->messageBody.name;
+				std::string greet = "Hello [" + messageProtocol->messageBody.name + "]!\nEnter a number (1 - 3) to join a room!\n1 - Prequel Memes, 2 - Chonkers, 3 - Rare puppers";
+				SendMessageToClient(Clients[index].Connection, 2, greet);*/
 			//}
 
 			//// Join the room
@@ -381,25 +408,25 @@ void HandleClients(int index)
 			//	std::string message = "[" + messageProtocol->messageBody.name + "]: " + messageProtocol->messageBody.message;
 			//	SendMessageOthersInGroup(index, Clients[index].room, 4, message);
 			//}
-
+			
 			packLength = 0;
 			packet.clear();
-			delete messageProtocol;
+			//delete messageProtocol;
 		}
 	}
 }
 
 // Sends message to current client
-void SendMessageToClient(SOCKET theConnection, int id, std::string message)
-{
-	Protocol* messageSendProtocol = new Protocol();
-	messageSendProtocol->CreateBuffer(512);
-	messageSendProtocol->messageHeader.commandId = id;
-	messageSendProtocol->messageBody.message = message;
-	messageSendProtocol->SendMessages(*messageSendProtocol->buffer, id);
-
-	std::vector<char> packet = messageSendProtocol->buffer->mBuffer;
-	send(theConnection, &packet[0], packet.size(), 0);
-
-	delete messageSendProtocol;
-}
+//void SendMessageToClient(SOCKET theConnection, int id, std::string message)
+//{
+//	Protocol* messageSendProtocol = new Protocol();
+//	messageSendProtocol->CreateBuffer(512);
+//	messageSendProtocol->messageHeader.commandId = id;
+//	messageSendProtocol->messageBody.message = message;
+//	messageSendProtocol->SendMessages(*messageSendProtocol->buffer, id);
+//
+//	std::vector<char> packet = messageSendProtocol->buffer->mBuffer;
+//	send(theConnection, &packet[0], packet.size(), 0);
+//
+//	delete messageSendProtocol;
+//}

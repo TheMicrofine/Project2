@@ -27,19 +27,74 @@ void Protocol::ReadHeader(Buffer &myBuffer)
 	return;
 }
 
-// Sends user inputted name to server as a packet
-void Protocol::SendName(Buffer &myBuffer)
+// Sends the username to server as a packet
+//void Protocol::SendName(Buffer &myBuffer)
+//{
+//	this->messageHeader.commandId = 1;
+//	this->messageHeader.packetLength = sizeof(int) + sizeof(short) + sizeof(int) + this->messageBody.userName.length();
+//	myBuffer.ResizeBuffer(this->messageHeader.packetLength);
+//	myBuffer.WriteInt32LE(this->messageHeader.packetLength);
+//	myBuffer.WriteShort16LE(this->messageHeader.commandId);
+//	myBuffer.WriteInt32LE(this->messageBody.userName.length());
+//	const char *temp = this->messageBody.userName.c_str();
+//	for (int i = 0; temp[i] != '\0'; i++)
+//	{
+//		myBuffer.WriteChar8LE(temp[i]);
+//	}
+//}
+
+void Protocol::SendRegister(Buffer &myBuffer)
 {
-	this->messageHeader.commandId = 1;
-	this->messageHeader.packetLength = sizeof(int) + sizeof(short) + sizeof(int) + this->messageBody.name.length();
+	this->messageHeader.commandId = 0;
+	this->messageHeader.packetLength = sizeof(int) + sizeof(short) + sizeof(int) + this->messageBody.email.length() + sizeof(int) + this->messageBody.password.length() + sizeof(int) + this->messageBody.userName.length();
+
 	myBuffer.ResizeBuffer(this->messageHeader.packetLength);
 	myBuffer.WriteInt32LE(this->messageHeader.packetLength);
 	myBuffer.WriteShort16LE(this->messageHeader.commandId);
-	myBuffer.WriteInt32LE(this->messageBody.name.length());
-	const char *temp = this->messageBody.name.c_str();
-	for (int i = 0; temp[i] != '\0'; i++)
+
+	myBuffer.WriteInt32LE(this->messageBody.email.length());
+	const char *tempE = this->messageBody.email.c_str();
+	for (int i = 0; tempE[i] != '\0'; i++)
 	{
-		myBuffer.WriteChar8LE(temp[i]);
+		myBuffer.WriteChar8LE(tempE[i]);
+	}
+
+	myBuffer.WriteInt32LE(this->messageBody.password.length());
+	const char* tempP = this->messageBody.password.c_str();
+	for (int i = 0; tempP[i] != '\0'; i++)
+	{
+		myBuffer.WriteChar8LE(tempP[i]);
+	}
+
+	myBuffer.WriteInt32LE(this->messageBody.userName.length());
+	const char* tempU = this->messageBody.userName.c_str();
+	for (int i = 0; tempU[i] != '\0'; i++)
+	{
+		myBuffer.WriteChar8LE(tempU[i]);
+	}
+}
+
+void Protocol::SendLogin(Buffer &myBuffer)
+{
+	this->messageHeader.commandId = 1;
+	this->messageHeader.packetLength = sizeof(int) + sizeof(short) + sizeof(int) + this->messageBody.email.length() + sizeof(int) + this->messageBody.password.length();
+
+	myBuffer.ResizeBuffer(this->messageHeader.packetLength);
+	myBuffer.WriteInt32LE(this->messageHeader.packetLength);
+	myBuffer.WriteShort16LE(this->messageHeader.commandId);
+
+	myBuffer.WriteInt32LE(this->messageBody.email.length());
+	const char* tempE = this->messageBody.email.c_str();
+	for (int i = 0; tempE[i] != '\0'; i++)
+	{
+		myBuffer.WriteChar8LE(tempE[i]);
+	}
+
+	myBuffer.WriteInt32LE(this->messageBody.password.length());
+	const char* tempP = this->messageBody.password.c_str();
+	for (int i = 0; tempP[i] != '\0'; i++)
+	{
+		myBuffer.WriteChar8LE(tempP[i]);
 	}
 }
 
@@ -48,9 +103,11 @@ void Protocol::JoinRoom(Buffer &myBuffer)
 {
 	this->messageHeader.commandId = 2;
 	this->messageHeader.packetLength = sizeof(int) + sizeof(short) + sizeof(int) + this->messageBody.roomName.length();
+
 	myBuffer.ResizeBuffer(this->messageHeader.packetLength);
 	myBuffer.WriteInt32LE(this->messageHeader.packetLength);
 	myBuffer.WriteShort16LE(this->messageHeader.commandId);
+	
 	myBuffer.WriteInt32LE(this->messageBody.roomName.length());
 	const char *temp = this->messageBody.roomName.c_str();
 	for (int i = 0; temp[i] != '\0'; i++)
@@ -64,6 +121,7 @@ void Protocol::LeaveRoom(Buffer &myBuffer)
 {
 	this->messageHeader.commandId = 3;
 	this->messageHeader.packetLength = sizeof(int) + sizeof(short);
+	
 	myBuffer.ResizeBuffer(this->messageHeader.packetLength);
 	myBuffer.WriteInt32LE(this->messageHeader.packetLength);
 	myBuffer.WriteShort16LE(this->messageHeader.commandId);
@@ -83,14 +141,14 @@ void Protocol::ReceiveMessage(Buffer &myBuffer)
 void Protocol::SendMessages(Buffer &myBuffer)
 {
 	this->messageHeader.commandId = 4;
-	this->messageHeader.packetLength = sizeof(int) + sizeof(short) + sizeof(int) + sizeof(int) + this->messageBody.name.length()+ sizeof(int) + this->messageBody.message.length();
+	this->messageHeader.packetLength = sizeof(int) + sizeof(short) + sizeof(int) + sizeof(int) + this->messageBody.userName.length()+ sizeof(int) + this->messageBody.message.length();
 
 	myBuffer.ResizeBuffer(this->messageHeader.packetLength);
 	myBuffer.WriteInt32LE(this->messageHeader.packetLength);
 	myBuffer.WriteShort16LE(this->messageHeader.commandId);
 
-	myBuffer.WriteInt32LE(this->messageBody.name.length());
-	const  char *tempName = this->messageBody.name.c_str();
+	myBuffer.WriteInt32LE(this->messageBody.userName.length());
+	const  char *tempName = this->messageBody.userName.c_str();
 	for (int i = 0; tempName[i] != '\0'; i++)
 	{
 		myBuffer.WriteChar8LE(tempName[i]);

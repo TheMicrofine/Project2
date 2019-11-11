@@ -247,11 +247,12 @@ class CreateAccount :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kEmailFieldNumber = 1,
-    kPlaintextPasswordFieldNumber = 2,
-    kUserNameFieldNumber = 3,
+    kEmailFieldNumber = 2,
+    kPlaintextPasswordFieldNumber = 3,
+    kUserNameFieldNumber = 4,
+    kRequestIdFieldNumber = 1,
   };
-  // required string email = 1;
+  // required string email = 2;
   bool has_email() const;
   private:
   bool _internal_has_email() const;
@@ -271,7 +272,7 @@ class CreateAccount :
   std::string* _internal_mutable_email();
   public:
 
-  // required string plaintextPassword = 2;
+  // required string plaintextPassword = 3;
   bool has_plaintextpassword() const;
   private:
   bool _internal_has_plaintextpassword() const;
@@ -291,7 +292,7 @@ class CreateAccount :
   std::string* _internal_mutable_plaintextpassword();
   public:
 
-  // required string userName = 3;
+  // required string userName = 4;
   bool has_username() const;
   private:
   bool _internal_has_username() const;
@@ -311,6 +312,19 @@ class CreateAccount :
   std::string* _internal_mutable_username();
   public:
 
+  // required int32 requestId = 1;
+  bool has_requestid() const;
+  private:
+  bool _internal_has_requestid() const;
+  public:
+  void clear_requestid();
+  ::PROTOBUF_NAMESPACE_ID::int32 requestid() const;
+  void set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_requestid() const;
+  void _internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:project2.CreateAccount)
  private:
   class _Internal;
@@ -324,6 +338,7 @@ class CreateAccount :
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr email_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr plaintextpassword_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr username_;
+  ::PROTOBUF_NAMESPACE_ID::int32 requestid_;
   friend struct ::TableStruct_project2_2eproto;
 };
 // -------------------------------------------------------------------
@@ -441,9 +456,10 @@ class CreateAccountSuccess :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kUserNameFieldNumber = 1,
+    kUserNameFieldNumber = 2,
+    kRequestIdFieldNumber = 1,
   };
-  // required string userName = 1;
+  // required string userName = 2;
   bool has_username() const;
   private:
   bool _internal_has_username() const;
@@ -463,14 +479,31 @@ class CreateAccountSuccess :
   std::string* _internal_mutable_username();
   public:
 
+  // required int32 requestId = 1;
+  bool has_requestid() const;
+  private:
+  bool _internal_has_requestid() const;
+  public:
+  void clear_requestid();
+  ::PROTOBUF_NAMESPACE_ID::int32 requestid() const;
+  void set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_requestid() const;
+  void _internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:project2.CreateAccountSuccess)
  private:
   class _Internal;
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr username_;
+  ::PROTOBUF_NAMESPACE_ID::int32 requestid_;
   friend struct ::TableStruct_project2_2eproto;
 };
 // -------------------------------------------------------------------
@@ -619,6 +652,22 @@ class CreateAccountFailure :
 
   // accessors -------------------------------------------------------
 
+  enum : int {
+    kRequestIdFieldNumber = 1,
+  };
+  // required int32 requestId = 1;
+  bool has_requestid() const;
+  private:
+  bool _internal_has_requestid() const;
+  public:
+  void clear_requestid();
+  ::PROTOBUF_NAMESPACE_ID::int32 requestid() const;
+  void set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_requestid() const;
+  void _internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:project2.CreateAccountFailure)
  private:
   class _Internal;
@@ -626,6 +675,7 @@ class CreateAccountFailure :
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  ::PROTOBUF_NAMESPACE_ID::int32 requestid_;
   friend struct ::TableStruct_project2_2eproto;
 };
 // -------------------------------------------------------------------
@@ -743,10 +793,11 @@ class Authenticate :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kEmailFieldNumber = 1,
-    kPlaintextPasswordFieldNumber = 2,
+    kEmailFieldNumber = 2,
+    kPlaintextPasswordFieldNumber = 3,
+    kRequestIdFieldNumber = 1,
   };
-  // required string email = 1;
+  // required string email = 2;
   bool has_email() const;
   private:
   bool _internal_has_email() const;
@@ -766,7 +817,7 @@ class Authenticate :
   std::string* _internal_mutable_email();
   public:
 
-  // required string plaintextPassword = 2;
+  // required string plaintextPassword = 3;
   bool has_plaintextpassword() const;
   private:
   bool _internal_has_plaintextpassword() const;
@@ -786,6 +837,19 @@ class Authenticate :
   std::string* _internal_mutable_plaintextpassword();
   public:
 
+  // required int32 requestId = 1;
+  bool has_requestid() const;
+  private:
+  bool _internal_has_requestid() const;
+  public:
+  void clear_requestid();
+  ::PROTOBUF_NAMESPACE_ID::int32 requestid() const;
+  void set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_requestid() const;
+  void _internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:project2.Authenticate)
  private:
   class _Internal;
@@ -798,6 +862,7 @@ class Authenticate :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr email_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr plaintextpassword_;
+  ::PROTOBUF_NAMESPACE_ID::int32 requestid_;
   friend struct ::TableStruct_project2_2eproto;
 };
 // -------------------------------------------------------------------
@@ -915,10 +980,11 @@ class AuthenticateSuccess :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kUserNameFieldNumber = 1,
-    kCreationDateFieldNumber = 2,
+    kUserNameFieldNumber = 2,
+    kCreationDateFieldNumber = 3,
+    kRequestIdFieldNumber = 1,
   };
-  // required string userName = 1;
+  // required string userName = 2;
   bool has_username() const;
   private:
   bool _internal_has_username() const;
@@ -938,7 +1004,7 @@ class AuthenticateSuccess :
   std::string* _internal_mutable_username();
   public:
 
-  // required string creationDate = 2;
+  // required string creationDate = 3;
   bool has_creationdate() const;
   private:
   bool _internal_has_creationdate() const;
@@ -958,6 +1024,19 @@ class AuthenticateSuccess :
   std::string* _internal_mutable_creationdate();
   public:
 
+  // required int32 requestId = 1;
+  bool has_requestid() const;
+  private:
+  bool _internal_has_requestid() const;
+  public:
+  void clear_requestid();
+  ::PROTOBUF_NAMESPACE_ID::int32 requestid() const;
+  void set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_requestid() const;
+  void _internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:project2.AuthenticateSuccess)
  private:
   class _Internal;
@@ -970,6 +1049,7 @@ class AuthenticateSuccess :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr username_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr creationdate_;
+  ::PROTOBUF_NAMESPACE_ID::int32 requestid_;
   friend struct ::TableStruct_project2_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1116,6 +1196,22 @@ class AuthenticateFailure :
 
   // accessors -------------------------------------------------------
 
+  enum : int {
+    kRequestIdFieldNumber = 1,
+  };
+  // required int32 requestId = 1;
+  bool has_requestid() const;
+  private:
+  bool _internal_has_requestid() const;
+  public:
+  void clear_requestid();
+  ::PROTOBUF_NAMESPACE_ID::int32 requestid() const;
+  void set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_requestid() const;
+  void _internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:project2.AuthenticateFailure)
  private:
   class _Internal;
@@ -1123,6 +1219,7 @@ class AuthenticateFailure :
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  ::PROTOBUF_NAMESPACE_ID::int32 requestid_;
   friend struct ::TableStruct_project2_2eproto;
 };
 // ===================================================================
@@ -1136,7 +1233,35 @@ class AuthenticateFailure :
 #endif  // __GNUC__
 // CreateAccount
 
-// required string email = 1;
+// required int32 requestId = 1;
+inline bool CreateAccount::_internal_has_requestid() const {
+  bool value = (_has_bits_[0] & 0x00000008u) != 0;
+  return value;
+}
+inline bool CreateAccount::has_requestid() const {
+  return _internal_has_requestid();
+}
+inline void CreateAccount::clear_requestid() {
+  requestid_ = 0;
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 CreateAccount::_internal_requestid() const {
+  return requestid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 CreateAccount::requestid() const {
+  // @@protoc_insertion_point(field_get:project2.CreateAccount.requestId)
+  return _internal_requestid();
+}
+inline void CreateAccount::_internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _has_bits_[0] |= 0x00000008u;
+  requestid_ = value;
+}
+inline void CreateAccount::set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_requestid(value);
+  // @@protoc_insertion_point(field_set:project2.CreateAccount.requestId)
+}
+
+// required string email = 2;
 inline bool CreateAccount::_internal_has_email() const {
   bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;
@@ -1207,7 +1332,7 @@ inline void CreateAccount::set_allocated_email(std::string* email) {
   // @@protoc_insertion_point(field_set_allocated:project2.CreateAccount.email)
 }
 
-// required string plaintextPassword = 2;
+// required string plaintextPassword = 3;
 inline bool CreateAccount::_internal_has_plaintextpassword() const {
   bool value = (_has_bits_[0] & 0x00000002u) != 0;
   return value;
@@ -1278,7 +1403,7 @@ inline void CreateAccount::set_allocated_plaintextpassword(std::string* plaintex
   // @@protoc_insertion_point(field_set_allocated:project2.CreateAccount.plaintextPassword)
 }
 
-// required string userName = 3;
+// required string userName = 4;
 inline bool CreateAccount::_internal_has_username() const {
   bool value = (_has_bits_[0] & 0x00000004u) != 0;
   return value;
@@ -1353,7 +1478,35 @@ inline void CreateAccount::set_allocated_username(std::string* username) {
 
 // CreateAccountSuccess
 
-// required string userName = 1;
+// required int32 requestId = 1;
+inline bool CreateAccountSuccess::_internal_has_requestid() const {
+  bool value = (_has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline bool CreateAccountSuccess::has_requestid() const {
+  return _internal_has_requestid();
+}
+inline void CreateAccountSuccess::clear_requestid() {
+  requestid_ = 0;
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 CreateAccountSuccess::_internal_requestid() const {
+  return requestid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 CreateAccountSuccess::requestid() const {
+  // @@protoc_insertion_point(field_get:project2.CreateAccountSuccess.requestId)
+  return _internal_requestid();
+}
+inline void CreateAccountSuccess::_internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _has_bits_[0] |= 0x00000002u;
+  requestid_ = value;
+}
+inline void CreateAccountSuccess::set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_requestid(value);
+  // @@protoc_insertion_point(field_set:project2.CreateAccountSuccess.requestId)
+}
+
+// required string userName = 2;
 inline bool CreateAccountSuccess::_internal_has_username() const {
   bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;
@@ -1428,11 +1581,67 @@ inline void CreateAccountSuccess::set_allocated_username(std::string* username) 
 
 // CreateAccountFailure
 
+// required int32 requestId = 1;
+inline bool CreateAccountFailure::_internal_has_requestid() const {
+  bool value = (_has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool CreateAccountFailure::has_requestid() const {
+  return _internal_has_requestid();
+}
+inline void CreateAccountFailure::clear_requestid() {
+  requestid_ = 0;
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 CreateAccountFailure::_internal_requestid() const {
+  return requestid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 CreateAccountFailure::requestid() const {
+  // @@protoc_insertion_point(field_get:project2.CreateAccountFailure.requestId)
+  return _internal_requestid();
+}
+inline void CreateAccountFailure::_internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _has_bits_[0] |= 0x00000001u;
+  requestid_ = value;
+}
+inline void CreateAccountFailure::set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_requestid(value);
+  // @@protoc_insertion_point(field_set:project2.CreateAccountFailure.requestId)
+}
+
 // -------------------------------------------------------------------
 
 // Authenticate
 
-// required string email = 1;
+// required int32 requestId = 1;
+inline bool Authenticate::_internal_has_requestid() const {
+  bool value = (_has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline bool Authenticate::has_requestid() const {
+  return _internal_has_requestid();
+}
+inline void Authenticate::clear_requestid() {
+  requestid_ = 0;
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 Authenticate::_internal_requestid() const {
+  return requestid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 Authenticate::requestid() const {
+  // @@protoc_insertion_point(field_get:project2.Authenticate.requestId)
+  return _internal_requestid();
+}
+inline void Authenticate::_internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _has_bits_[0] |= 0x00000004u;
+  requestid_ = value;
+}
+inline void Authenticate::set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_requestid(value);
+  // @@protoc_insertion_point(field_set:project2.Authenticate.requestId)
+}
+
+// required string email = 2;
 inline bool Authenticate::_internal_has_email() const {
   bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;
@@ -1503,7 +1712,7 @@ inline void Authenticate::set_allocated_email(std::string* email) {
   // @@protoc_insertion_point(field_set_allocated:project2.Authenticate.email)
 }
 
-// required string plaintextPassword = 2;
+// required string plaintextPassword = 3;
 inline bool Authenticate::_internal_has_plaintextpassword() const {
   bool value = (_has_bits_[0] & 0x00000002u) != 0;
   return value;
@@ -1578,7 +1787,35 @@ inline void Authenticate::set_allocated_plaintextpassword(std::string* plaintext
 
 // AuthenticateSuccess
 
-// required string userName = 1;
+// required int32 requestId = 1;
+inline bool AuthenticateSuccess::_internal_has_requestid() const {
+  bool value = (_has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline bool AuthenticateSuccess::has_requestid() const {
+  return _internal_has_requestid();
+}
+inline void AuthenticateSuccess::clear_requestid() {
+  requestid_ = 0;
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 AuthenticateSuccess::_internal_requestid() const {
+  return requestid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 AuthenticateSuccess::requestid() const {
+  // @@protoc_insertion_point(field_get:project2.AuthenticateSuccess.requestId)
+  return _internal_requestid();
+}
+inline void AuthenticateSuccess::_internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _has_bits_[0] |= 0x00000004u;
+  requestid_ = value;
+}
+inline void AuthenticateSuccess::set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_requestid(value);
+  // @@protoc_insertion_point(field_set:project2.AuthenticateSuccess.requestId)
+}
+
+// required string userName = 2;
 inline bool AuthenticateSuccess::_internal_has_username() const {
   bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;
@@ -1649,7 +1886,7 @@ inline void AuthenticateSuccess::set_allocated_username(std::string* username) {
   // @@protoc_insertion_point(field_set_allocated:project2.AuthenticateSuccess.userName)
 }
 
-// required string creationDate = 2;
+// required string creationDate = 3;
 inline bool AuthenticateSuccess::_internal_has_creationdate() const {
   bool value = (_has_bits_[0] & 0x00000002u) != 0;
   return value;
@@ -1723,6 +1960,34 @@ inline void AuthenticateSuccess::set_allocated_creationdate(std::string* creatio
 // -------------------------------------------------------------------
 
 // AuthenticateFailure
+
+// required int32 requestId = 1;
+inline bool AuthenticateFailure::_internal_has_requestid() const {
+  bool value = (_has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool AuthenticateFailure::has_requestid() const {
+  return _internal_has_requestid();
+}
+inline void AuthenticateFailure::clear_requestid() {
+  requestid_ = 0;
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 AuthenticateFailure::_internal_requestid() const {
+  return requestid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 AuthenticateFailure::requestid() const {
+  // @@protoc_insertion_point(field_get:project2.AuthenticateFailure.requestId)
+  return _internal_requestid();
+}
+inline void AuthenticateFailure::_internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _has_bits_[0] |= 0x00000001u;
+  requestid_ = value;
+}
+inline void AuthenticateFailure::set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_requestid(value);
+  // @@protoc_insertion_point(field_set:project2.AuthenticateFailure.requestId)
+}
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
