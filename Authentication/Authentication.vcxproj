@@ -142,11 +142,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="addressbook.pb.cc" />
     <ClCompile Include="bcrypt.c" />
     <ClCompile Include="Buffer_Authentication.cpp" />
     <ClCompile Include="crypt_blowfish.c" />
     <ClCompile Include="crypt_gensalt.c" />
+    <ClCompile Include="databases.cpp" />
     <ClCompile Include="DBHelper.cpp" />
     <ClCompile Include="Main_Authentication.cpp" />
     <ClCompile Include="Project2.pb.cc" />
@@ -154,7 +154,6 @@
     <ClCompile Include="wrapper.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="addressbook.pb.h" />
     <ClInclude Include="Buffer_Authentication.h" />
     <ClInclude Include="DBHelper.h" />
     <ClInclude Include="Project2.pb.h" />

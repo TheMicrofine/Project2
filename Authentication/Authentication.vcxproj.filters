@@ -45,9 +45,6 @@
     <ClCompile Include="Main_Authentication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="addressbook.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DBHelper.cpp">
       <Filter>DBHelper</Filter>
     </ClCompile>
@@ -60,11 +57,11 @@
     <ClCompile Include="Buffer_Authentication.cpp">
       <Filter>Buffer</Filter>
     </ClCompile>
+    <ClCompile Include="databases.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="addressbook.pb.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="DBHelper.h">
       <Filter>DBHelper</Filter>
     </ClInclude>
