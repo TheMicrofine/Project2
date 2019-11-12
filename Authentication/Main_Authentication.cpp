@@ -116,15 +116,12 @@ int RegisterAccount(std::string email, std::string password, std::string userNam
 	try
 	{
 		// Check if email already exists
-		pstmt = con->prepareStatement("SELECT * FROM web_authentication WHERE email = '" + email + "';");
+		pstmt = con->prepareStatement("SELECT * FROM web_authentication WHERE Email = '" + email + "';");
 		rs = pstmt->executeQuery();
-
-		// TODO: Valid password before adding it into database
-		// if not valid return 2;
 
 		if (rs->rowsCount() > 0)
 		{
-			std::cout << "Account already exists" << std::endl;
+			std::cout << "Account already exists." << std::endl;
 			return 1;
 		}
 		else
@@ -167,12 +164,8 @@ int RegisterAccount(std::string email, std::string password, std::string userNam
 	}
 }
 
-int AuthenticateAccount(std::string email, std::string password, std::string userName)
+int AuthenticateAccount(std::string email, std::string password)
 {
-	// TODO: Get username based from the table and creation date
-	loginUsername = "";
-	creationDate = "";
-
 	// Confirm if email already exists
 	try
 	{
@@ -181,16 +174,37 @@ int AuthenticateAccount(std::string email, std::string password, std::string use
 
 		if (rs->rowsCount() == 0)
 		{
-			std::cout << "Account does not exist" << std::endl;
+			std::cout << "Account does not exist." << std::endl;
 			return 1;
 		}
 		else
 		{
+			rs->next();
+			std::string hashedPassword = rs->getString("Hashed_Password");
+
+			if (!BCrypt::validatePassword(password, hashedPassword))
+			{
+				std::cout << "Invaild password." << std::endl;
+				return 2;
+			}
+
+			int userID = rs->getInt64("UserID");
+
+			pstmt = con->prepareStatement("SELECT * FROM user WHERE ID = '"+ std::to_string(userID) +"';");
+			rs = pstmt->executeQuery();
+			rs->next();
+			loginUsername = rs->getString("User_Name");
+			creationDate = rs->getString("Creation_Date");
+
+			std::cout << loginUsername << std::endl;
+			std::cout << creationDate << std::endl;
+
 			// Update user's login time
-			pstmt = con->prepareStatement("UPDATE user SET Last_Login = '" + currentDateTime() + "' WHERE User_Name = '" + userName + "'");
+			pstmt = con->prepareStatement("UPDATE user SET Last_Login = '"+ currentDateTime() +"' WHERE User_Name = '" + loginUsername + "'");
 			rs = pstmt->executeQuery();
 
 			std::cout << "Sign in logged succesfully." << std::endl;
+
 			return 0;
 		}
 	}
@@ -217,6 +231,27 @@ int main(void)
 	}
 
 	std::cout << "Starting authentication server..." << std::endl;
+
+	try
+	{
+		driver = get_driver_instance();
+		con = driver->connect(server, username, password);
+		printf("Successfully connected to our database!\n");
+
+		con->setSchema(schema);
+		printf("Successfully set our schema!\n");
+	}
+	catch (sql::SQLException & exception)
+	{
+		std::cout << "# ERR: SQLException in " << __FILE__;
+		std::cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << std::endl;
+		std::cout << "# ERR: " << exception.what();
+		std::cout << " (MySQL error code: " << exception.getErrorCode();
+		std::cout << ", SQLState: " << exception.getSQLState() << ")" << std::endl;
+		system("Pause");
+		return 1;
+	}
+
 
 	// Socket addres info
 	SOCKADDR_IN addr;
@@ -287,9 +322,9 @@ void HandleClient(int index)
 				std::cout << "Email: [" << newAccount->email().c_str() << "]\nPassword: [" << newAccount->plaintextpassword().c_str() << "]\nUsername: [" << newAccount->username().c_str() << "]" << std::endl;
 
 				//TODO: FIX THIS
-				//int result = RegisterAccount(newAccount->email().c_str(), newAccount->plaintextpassword().c_str(), newAccount->username().c_str());
+				int result = RegisterAccount(newAccount->email().c_str(), newAccount->plaintextpassword().c_str(), 
+					newAccount->username().c_str());
 
-				int result = 0;
 				std::cout << "Result: " << result << std::endl;
 
 				// 0 = Success, 1 = Account exists, 2 = Invalid password, 3 = Server error
@@ -329,12 +364,11 @@ void HandleClient(int index)
 				Authenticate* loginAccount = new Authenticate();
 				loginAccount->ParseFromString(packetContents);
 				// Check data
-				std::cout << "Email: [" << loginAccount->email().c_str() << "]\nPassword: [" << loginAccount->plaintextpassword().c_str() << "]" << std::endl;
+				std::cout << "Email: [" << loginAccount->email().c_str() << "]\nPassword: [" << 
+					loginAccount->plaintextpassword().c_str() << "]" << std::endl;
 
-				//TODO: FIX THIS
-				//int result = AuthenticateAccount(newAccount->email().c_str(), newAccount->plaintextpassword().c_str());
+				int result = AuthenticateAccount(loginAccount->email().c_str(), loginAccount->plaintextpassword().c_str());
 
-				int result = 0;
 				std::cout << "Result: " << result << std::endl;
 
 				// 0 = Success, 1 = Account doesnt exist, 2 = Server error
@@ -342,7 +376,7 @@ void HandleClient(int index)
 				{
 					// Placeholders
 					loginUsername = loginAccount->email().c_str();
-					creationDate = "2019-11-12";
+					// creationDate = "2019-11-12";
 
 					AuthenticateSuccess* successAccount = new AuthenticateSuccess();
 					successAccount->set_requestid(loginAccount->requestid());
