@@ -25,7 +25,7 @@ std::string email;
 std::string password;
 std::string userName;
 
-bool validCredentials = false;
+bool isValidCredentials = false;
 
 int main(void)
 {
@@ -52,8 +52,9 @@ int main(void)
 	}
 
 	std::cout << "Connected!" << std::endl;
-
-	while (true)
+	CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ClientThread, NULL, NULL, NULL); //Create a thread
+	
+	while (!isValidCredentials) 
 	{
 		std::cout << "Would you like to 'Login' or 'Register'?" << std::endl;
 
@@ -77,7 +78,6 @@ int main(void)
 
 			std::vector<char> packet = registerProtocol->buffer->mBuffer;
 			send(Connection, &packet[0], packet.size(), 0);
-			break;
 		}
 		else if (input == "Login")
 		{
@@ -94,16 +94,16 @@ int main(void)
 
 			std::vector<char> packet = loginProtocol->buffer->mBuffer;
 			send(Connection, &packet[0], packet.size(), 0);
-
-			break;
 		}
+
+		Sleep(10);
 	}
 
-	CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ClientThread, NULL, NULL, NULL); //Create a thread
+
 
 	while (true)
 	{
-		if (validCredentials)
+		if (isValidCredentials)
 		{
 			Protocol* messageSendProtocol = new Protocol();
 
@@ -170,6 +170,10 @@ void ClientThread()
 			std::cout << messageProtocol->messageBody.message << std::endl;
 			commandID = messageProtocol->messageHeader.commandId;
 
+			if (commandID == 5)
+			{
+				isValidCredentials = true;
+			}
 			delete messageProtocol;
 		}
 	}

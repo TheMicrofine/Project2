@@ -654,6 +654,7 @@ class CreateAccountFailure :
 
   enum : int {
     kRequestIdFieldNumber = 1,
+    kReasonFieldNumber = 2,
   };
   // required int32 requestId = 1;
   bool has_requestid() const;
@@ -668,14 +669,31 @@ class CreateAccountFailure :
   void _internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
+  // required .project2.CreateAccountFailure.Reason reason = 2;
+  bool has_reason() const;
+  private:
+  bool _internal_has_reason() const;
+  public:
+  void clear_reason();
+  ::project2::CreateAccountFailure_Reason reason() const;
+  void set_reason(::project2::CreateAccountFailure_Reason value);
+  private:
+  ::project2::CreateAccountFailure_Reason _internal_reason() const;
+  void _internal_set_reason(::project2::CreateAccountFailure_Reason value);
+  public:
+
   // @@protoc_insertion_point(class_scope:project2.CreateAccountFailure)
  private:
   class _Internal;
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::int32 requestid_;
+  int reason_;
   friend struct ::TableStruct_project2_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1198,6 +1216,7 @@ class AuthenticateFailure :
 
   enum : int {
     kRequestIdFieldNumber = 1,
+    kReasonFieldNumber = 2,
   };
   // required int32 requestId = 1;
   bool has_requestid() const;
@@ -1212,14 +1231,31 @@ class AuthenticateFailure :
   void _internal_set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
+  // required .project2.AuthenticateFailure.Reason reason = 2;
+  bool has_reason() const;
+  private:
+  bool _internal_has_reason() const;
+  public:
+  void clear_reason();
+  ::project2::AuthenticateFailure_Reason reason() const;
+  void set_reason(::project2::AuthenticateFailure_Reason value);
+  private:
+  ::project2::AuthenticateFailure_Reason _internal_reason() const;
+  void _internal_set_reason(::project2::AuthenticateFailure_Reason value);
+  public:
+
   // @@protoc_insertion_point(class_scope:project2.AuthenticateFailure)
  private:
   class _Internal;
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::int32 requestid_;
+  int reason_;
   friend struct ::TableStruct_project2_2eproto;
 };
 // ===================================================================
@@ -1609,6 +1645,35 @@ inline void CreateAccountFailure::set_requestid(::PROTOBUF_NAMESPACE_ID::int32 v
   // @@protoc_insertion_point(field_set:project2.CreateAccountFailure.requestId)
 }
 
+// required .project2.CreateAccountFailure.Reason reason = 2;
+inline bool CreateAccountFailure::_internal_has_reason() const {
+  bool value = (_has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline bool CreateAccountFailure::has_reason() const {
+  return _internal_has_reason();
+}
+inline void CreateAccountFailure::clear_reason() {
+  reason_ = 0;
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline ::project2::CreateAccountFailure_Reason CreateAccountFailure::_internal_reason() const {
+  return static_cast< ::project2::CreateAccountFailure_Reason >(reason_);
+}
+inline ::project2::CreateAccountFailure_Reason CreateAccountFailure::reason() const {
+  // @@protoc_insertion_point(field_get:project2.CreateAccountFailure.reason)
+  return _internal_reason();
+}
+inline void CreateAccountFailure::_internal_set_reason(::project2::CreateAccountFailure_Reason value) {
+  assert(::project2::CreateAccountFailure_Reason_IsValid(value));
+  _has_bits_[0] |= 0x00000002u;
+  reason_ = value;
+}
+inline void CreateAccountFailure::set_reason(::project2::CreateAccountFailure_Reason value) {
+  _internal_set_reason(value);
+  // @@protoc_insertion_point(field_set:project2.CreateAccountFailure.reason)
+}
+
 // -------------------------------------------------------------------
 
 // Authenticate
@@ -1987,6 +2052,35 @@ inline void AuthenticateFailure::_internal_set_requestid(::PROTOBUF_NAMESPACE_ID
 inline void AuthenticateFailure::set_requestid(::PROTOBUF_NAMESPACE_ID::int32 value) {
   _internal_set_requestid(value);
   // @@protoc_insertion_point(field_set:project2.AuthenticateFailure.requestId)
+}
+
+// required .project2.AuthenticateFailure.Reason reason = 2;
+inline bool AuthenticateFailure::_internal_has_reason() const {
+  bool value = (_has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline bool AuthenticateFailure::has_reason() const {
+  return _internal_has_reason();
+}
+inline void AuthenticateFailure::clear_reason() {
+  reason_ = 0;
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline ::project2::AuthenticateFailure_Reason AuthenticateFailure::_internal_reason() const {
+  return static_cast< ::project2::AuthenticateFailure_Reason >(reason_);
+}
+inline ::project2::AuthenticateFailure_Reason AuthenticateFailure::reason() const {
+  // @@protoc_insertion_point(field_get:project2.AuthenticateFailure.reason)
+  return _internal_reason();
+}
+inline void AuthenticateFailure::_internal_set_reason(::project2::AuthenticateFailure_Reason value) {
+  assert(::project2::AuthenticateFailure_Reason_IsValid(value));
+  _has_bits_[0] |= 0x00000002u;
+  reason_ = value;
+}
+inline void AuthenticateFailure::set_reason(::project2::AuthenticateFailure_Reason value) {
+  _internal_set_reason(value);
+  // @@protoc_insertion_point(field_set:project2.AuthenticateFailure.reason)
 }
 
 #ifdef __GNUC__

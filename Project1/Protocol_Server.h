@@ -31,16 +31,13 @@ public:
 
 	void ReceiveRegister(Buffer& myBuffer);
 	void ReceiveLogin(Buffer& myBuffer);
-	//void ReceiveName(Buffer &myBuffer);
+
 	void JoinRoom(Buffer& myBuffer);
 	void LeaveRoom(Buffer& myBuffer);
 
 	void ReceiveMessage(Buffer& myBuffer);
 	void SendMessages(Buffer& myBuffer, int id);
 	void SendMessages(Buffer& myBuffer);
-
-	void SendRegister(std::string Buffer);
-	void SendLogin(std::string Buffer);
 
 	Header messageHeader;
 	Body messageBody;

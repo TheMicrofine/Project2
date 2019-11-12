@@ -103,13 +103,3 @@ void Protocol::SendMessages(Buffer& myBuffer, int id)
 	}
 }
 
-void Protocol::SendRegister(std::string Buffer)
-{
-	this->messageHeader.commandId = 0;
-	this->messageHeader.packetLength = this->messageBody.message.length();
-}
-
-void Protocol::SendLogin(std::string Buffer)
-{
-
-}

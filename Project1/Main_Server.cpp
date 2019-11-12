@@ -32,38 +32,17 @@ SOCKET ConnectionClient;
 int commandID;
 bool run = true;
 void ServerClientThread();
+void SendToAuthentication(int id, std::string message);
 
 // Server Variables
 Client Clients[100];
 std::vector<int> lobby;
-
 int clientsCounter = 0;
+
 void HandleClients(int index);
 void SendMessageToClient(SOCKET theConnection, int id, std::string message);
 void SendMessageToAllInGroup(std::string groupName, int id, std::string message);
 void SendMessageOthersInGroup(int clientIndex, std::string groupName, int id, std::string message);
-
-void CreateNewAccount(
-	CreateAccount* newAccount,
-	std::string email,
-	std::string password,
-	std::string username)
-{
-	newAccount->set_requestid(0);
-	newAccount->set_email(email);
-	newAccount->set_plaintextpassword(password);
-	newAccount->set_username(username);
-}
-
-void CreateAuthenticate(
-	Authenticate* login,
-	std::string email,
-	std::string password)
-{
-	login->set_requestid(1);
-	login->set_email(email);
-	login->set_plaintextpassword(password);
-}
 
 int main(void)
 {
@@ -109,7 +88,7 @@ int main(void)
 
 	//To accept a connection
 	SOCKET newConnection; //Socket to hold the client's connection
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		newConnection = accept(sListen, (SOCKADDR*)&addr, &addrlen);
 		if (newConnection == 0)
@@ -167,7 +146,7 @@ int main(void)
 	return 0;
 }
 
-// Handle the client thread and receives messages from the server
+// Receives messages from the authentication server
 void ServerClientThread()
 {
 	std::vector<char> packet(512);
@@ -182,23 +161,87 @@ void ServerClientThread()
 		}
 		else
 		{
-			Protocol* messageProtocol = new Protocol();
-			messageProtocol->CreateBuffer(512);
+			int command = packet[0];
+			int length = packet[1];
+			std::string packetContents;
 
-			messageProtocol->buffer->mBuffer = packet;
-			messageProtocol->ReadHeader(*messageProtocol->buffer);
+			for (int i = 2; i <= length + 1; i++)
+			{
+				packetContents += packet[i];
+			}
 
-			messageProtocol->buffer->ResizeBuffer(messageProtocol->messageHeader.packetLength);
+			if (command == 0) // Register success
+			{
+				CreateAccountSuccess* successAccount = new CreateAccountSuccess();
+				successAccount->ParseFromString(packetContents);
 
-			messageProtocol->ReceiveMessage(*messageProtocol->buffer);
-			std::cout << messageProtocol->messageBody.message << std::endl;
-			commandID = messageProtocol->messageHeader.commandId;
+				std::string username = successAccount->username().c_str();
 
-			delete messageProtocol;
+				std::cout << "New user created\nUsername: [" << username << "]" << std::endl;
+
+				std::string greet = "Hello [" + username + "]!\nEnter a number (1 - 3) to join a room!\n1 - Prequel Memes, 2 - Chonkers, 3 - Rare puppers";
+
+				SendMessageToClient(Clients[successAccount->requestid()].Connection, 5, "Registration Successful");
+				SendMessageToClient(Clients[successAccount->requestid()].Connection, 2, greet);
+			}
+			else if (command == 1) // Register failure
+			{
+				CreateAccountFailure* failAccount = new CreateAccountFailure();
+				failAccount->ParseFromString(packetContents);
+
+				std::string reason = "";
+				if (failAccount->reason() == failAccount->ACCOUNT_ALREADY_EXISTS)
+				{
+					reason = "Account already exists";
+				}
+				else if (failAccount->reason() == failAccount->INVALID_PASSWORD)
+				{
+					reason = "Invalid password";
+				}
+				else if (failAccount->reason() == failAccount->INTERNAL_SERVER_ERROR)
+				{
+					reason = "Internal server error";
+				}
+
+				SendMessageToClient(Clients[failAccount->requestid()].Connection, 6, reason);
+			}
+			else if (command == 2) // Login Success
+			{
+				AuthenticateSuccess* successAccount = new AuthenticateSuccess();
+				successAccount->ParseFromString(packetContents);
+
+				std::string username = successAccount->username().c_str();
+				std::string creationdate = successAccount->creationdate().c_str();
+
+				std::cout << "Username: [" << username << "] logged in, CreationDate: [" << creationdate << "]" << std::endl;
+
+				std::string result = "Authentication successful, account created on on " + creationdate;
+
+				std::string greet = "Hello [" + username + "]!\nEnter a number (1 - 3) to join a room!\n1 - Prequel Memes, 2 - Chonkers, 3 - Rare puppers";
+
+				SendMessageToClient(Clients[successAccount->requestid()].Connection, 5, result);
+				SendMessageToClient(Clients[successAccount->requestid()].Connection, 2, greet);
+			}
+			else if (command == 3) // Login failure
+			{
+				AuthenticateFailure* failAccount = new AuthenticateFailure();
+				failAccount->ParseFromString(packetContents);
+
+				std::string reason = "";
+				if (failAccount->reason() == failAccount->INVALID_CREDENTIALS)
+				{
+					reason = "Invalid credentials";
+				}
+				else if (failAccount->reason() == failAccount->INTERNAL_SERVER_ERROR)
+				{
+					reason = "Internal server error";
+				}
+
+				SendMessageToClient(Clients[failAccount->requestid()].Connection, 6, reason);
+			}
 		}
 	}
 }
-
 
 void HandleClients(int index)
 {
@@ -231,27 +274,28 @@ void HandleClients(int index)
 
 				CreateAccount* newAccount = new CreateAccount();
 
-				CreateNewAccount(
-					newAccount,
-					messageProtocol->messageBody.email.c_str(),
-					messageProtocol->messageBody.password.c_str(),
-					messageProtocol->messageBody.userName.c_str());
+				newAccount->set_requestid(index);
+				newAccount->set_email(messageProtocol->messageBody.email.c_str());
+				newAccount->set_plaintextpassword(messageProtocol->messageBody.password.c_str());
+				newAccount->set_username(messageProtocol->messageBody.userName.c_str());
 
 				std::string serializedAccount = newAccount->SerializeAsString();
 
-				// Packet -> [command][size][contents]
-				std::vector<char> packet;
-				packet.push_back(0);
-				packet.push_back(serializedAccount.length());
+				SendToAuthentication(0, serializedAccount);
 
-				const char* temp = serializedAccount.c_str();
-				for (int i = 0; i < serializedAccount.length(); i++)
-				{
-					packet.push_back(temp[i]);
-				}
+				//// Packet -> [command][size][contents]
+				//std::vector<char> packet;
+				//packet.push_back(0);
+				//packet.push_back(serializedAccount.length());
 
-				send(ConnectionClient, &packet[0], packet.size(), 0);
-				Sleep(10);
+				//const char* temp = serializedAccount.c_str();
+				//for (int i = 0; i < serializedAccount.length(); i++)
+				//{
+				//	packet.push_back(temp[i]);
+				//}
+
+				//send(ConnectionClient, &packet[0], packet.size(), 0);
+				//Sleep(10);
 			}
 			// Log in
 			if (messageProtocol->messageHeader.commandId == 1)
@@ -261,27 +305,14 @@ void HandleClients(int index)
 				Clients[index].password = messageProtocol->messageBody.password;
 
 				Authenticate* loginAccount = new Authenticate();
-
-				CreateAuthenticate(
-					loginAccount,
-					messageProtocol->messageBody.email.c_str(),
-					messageProtocol->messageBody.password.c_str());
+				
+				loginAccount->set_requestid(index);
+				loginAccount->set_email(messageProtocol->messageBody.email.c_str());
+				loginAccount->set_plaintextpassword(messageProtocol->messageBody.password.c_str());
 
 				std::string serializedAccount = loginAccount->SerializeAsString();
 
-				// Packet -> [command][size][contents]
-				std::vector<char> packet;
-				packet.push_back(1);
-				packet.push_back(serializedAccount.length());
-
-				const char* temp = serializedAccount.c_str();
-				for (int i = 0; i < serializedAccount.length(); i++)
-				{
-					packet.push_back(temp[i]);
-				}
-
-				send(ConnectionClient, &packet[0], packet.size(), 0);
-				Sleep(10);
+				SendToAuthentication(1, serializedAccount);
 			}
 			//// Create name
 			//if (messageProtocol->messageHeader.commandId == 1)
@@ -349,6 +380,23 @@ void HandleClients(int index)
 			delete messageProtocol;
 		}
 	}
+}
+
+void SendToAuthentication(int id, std::string serializedString)
+{
+	// Packet -> [requestId][contentSize][content]
+	std::vector<char> packet;
+	packet.push_back(id);
+	packet.push_back(serializedString.length());
+
+	const char* temp = serializedString.c_str();
+	for (int i = 0; i < serializedString.length(); i++)
+	{
+		packet.push_back(temp[i]);
+	}
+
+	send(ConnectionClient, &packet[0], packet.size(), 0);
+	Sleep(10);
 }
 
 // Sends message to current client
