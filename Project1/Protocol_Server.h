@@ -39,6 +39,8 @@ public:
 	void SendMessages(Buffer& myBuffer, int id);
 	void SendMessages(Buffer& myBuffer);
 
+	void SendUsername(Buffer& myBuffer);
+
 	Header messageHeader;
 	Body messageBody;
 	Buffer* buffer;

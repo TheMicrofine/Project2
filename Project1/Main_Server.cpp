@@ -40,7 +40,7 @@ std::vector<int> lobby;
 int clientsCounter = 0;
 
 void HandleClients(int index);
-void SendMessageToClient(SOCKET theConnection, int id, std::string message);
+void SendMessageToClient(SOCKET theConnection, int id, std::string message, std::string username);
 void SendMessageToAllInGroup(std::string groupName, int id, std::string message);
 void SendMessageOthersInGroup(int clientIndex, std::string groupName, int id, std::string message);
 
@@ -117,30 +117,10 @@ int main(void)
 		messageSendProtocol->CreateBuffer(256);
 		messageSendProtocol->messageHeader.commandId = commandID;
 
-		//if (commandID == 2)
-		//{
-		//	messageSendProtocol->messageBody.roomName = input.c_str();
-		//	messageSendProtocol->JoinRoom(*messageSendProtocol->buffer);
-		//}
-		//else if (commandID == 4)
-		//{
-		//	if (input == "LeaveRoom")
-		//	{
-		//		messageSendProtocol->LeaveRoom(*messageSendProtocol->buffer);
-		//	}
-		//	else
-		//	{
-		//		messageSendProtocol->messageBody.name = nameProtocol->messageBody.name;
-		//		messageSendProtocol->messageBody.message = input.c_str();
-		//		messageSendProtocol->SendMessages(*messageSendProtocol->buffer);
-		//	}
-		//}
-
 		std::vector<char> packet = messageSendProtocol->buffer->mBuffer;
 		send(ConnectionClient, &packet[0], packet.size(), 0);
 		Sleep(10);
 	}
-
 
 	system("pause");
 	return 0;
@@ -181,8 +161,8 @@ void ServerClientThread()
 
 				std::string greet = "Hello [" + username + "]!\nEnter a number (1 - 3) to join a room!\n1 - Prequel Memes, 2 - Chonkers, 3 - Rare puppers";
 
-				SendMessageToClient(Clients[successAccount->requestid()].Connection, 5, "Registration Successful");
-				SendMessageToClient(Clients[successAccount->requestid()].Connection, 2, greet);
+				SendMessageToClient(Clients[successAccount->requestid()].Connection, 5, "Registration Successful", username);
+				SendMessageToClient(Clients[successAccount->requestid()].Connection, 2, greet, "");
 			}
 			else if (command == 1) // Register failure
 			{
@@ -194,6 +174,43 @@ void ServerClientThread()
 				{
 					reason = "Account already exists";
 				}
+				else if (failAccount->reason() == failAccount->INTERNAL_SERVER_ERROR)
+				{
+					reason = "Internal server error";
+				}
+
+				SendMessageToClient(Clients[failAccount->requestid()].Connection, 6, reason, "");
+			}
+			else if (command == 2) // Login Success
+			{
+				AuthenticateSuccess* successAccount = new AuthenticateSuccess();
+				successAccount->ParseFromString(packetContents);
+				
+				std::string username = successAccount->username().c_str();
+				
+				Clients[successAccount->requestid()].userName = username;
+
+				std::string creationdate = successAccount->creationdate().c_str();
+
+				std::cout << "Username: [" << username << "] logged in, CreationDate: [" << creationdate << "]" << std::endl;
+
+				std::string result = "Authentication successful, account created on on " + creationdate;
+
+				std::string greet = "Hello [" + username + "]!\nEnter a number (1 - 3) to join a room!\n1 - Prequel Memes, 2 - Chonkers, 3 - Rare puppers";
+
+				SendMessageToClient(Clients[successAccount->requestid()].Connection, 5, result, username);
+				SendMessageToClient(Clients[successAccount->requestid()].Connection, 2, greet, "");
+			}
+			else if (command == 3) // Login failure
+			{
+				AuthenticateFailure* failAccount = new AuthenticateFailure();
+				failAccount->ParseFromString(packetContents);
+
+				std::string reason = "";
+				if (failAccount->reason() == failAccount->ACCOUNT_DOES_NOT_EXIST)
+				{
+					reason = "Account does not exist";
+				}
 				else if (failAccount->reason() == failAccount->INVALID_PASSWORD)
 				{
 					reason = "Invalid password";
@@ -203,41 +220,7 @@ void ServerClientThread()
 					reason = "Internal server error";
 				}
 
-				SendMessageToClient(Clients[failAccount->requestid()].Connection, 6, reason);
-			}
-			else if (command == 2) // Login Success
-			{
-				AuthenticateSuccess* successAccount = new AuthenticateSuccess();
-				successAccount->ParseFromString(packetContents);
-
-				std::string username = successAccount->username().c_str();
-				std::string creationdate = successAccount->creationdate().c_str();
-
-				std::cout << "Username: [" << username << "] logged in, CreationDate: [" << creationdate << "]" << std::endl;
-
-				std::string result = "Authentication successful, account created on on " + creationdate;
-
-				std::string greet = "Hello [" + username + "]!\nEnter a number (1 - 3) to join a room!\n1 - Prequel Memes, 2 - Chonkers, 3 - Rare puppers";
-
-				SendMessageToClient(Clients[successAccount->requestid()].Connection, 5, result);
-				SendMessageToClient(Clients[successAccount->requestid()].Connection, 2, greet);
-			}
-			else if (command == 3) // Login failure
-			{
-				AuthenticateFailure* failAccount = new AuthenticateFailure();
-				failAccount->ParseFromString(packetContents);
-
-				std::string reason = "";
-				if (failAccount->reason() == failAccount->INVALID_CREDENTIALS)
-				{
-					reason = "Invalid credentials";
-				}
-				else if (failAccount->reason() == failAccount->INTERNAL_SERVER_ERROR)
-				{
-					reason = "Internal server error";
-				}
-
-				SendMessageToClient(Clients[failAccount->requestid()].Connection, 6, reason);
+				SendMessageToClient(Clients[failAccount->requestid()].Connection, 6, reason, "");
 			}
 		}
 	}
@@ -282,20 +265,6 @@ void HandleClients(int index)
 				std::string serializedAccount = newAccount->SerializeAsString();
 
 				SendToAuthentication(0, serializedAccount);
-
-				//// Packet -> [command][size][contents]
-				//std::vector<char> packet;
-				//packet.push_back(0);
-				//packet.push_back(serializedAccount.length());
-
-				//const char* temp = serializedAccount.c_str();
-				//for (int i = 0; i < serializedAccount.length(); i++)
-				//{
-				//	packet.push_back(temp[i]);
-				//}
-
-				//send(ConnectionClient, &packet[0], packet.size(), 0);
-				//Sleep(10);
 			}
 			// Log in
 			if (messageProtocol->messageHeader.commandId == 1)
@@ -314,20 +283,12 @@ void HandleClients(int index)
 
 				SendToAuthentication(1, serializedAccount);
 			}
-			//// Create name
-			//if (messageProtocol->messageHeader.commandId == 1)
-			//{
-			//	messageProtocol->ReceiveName(*messageProtocol->buffer);
-			//	Clients[index].userName = messageProtocol->messageBody.userName;
-			//	std::string greet = "Hello [" + messageProtocol->messageBody.userName + "]!\nEnter a number (1 - 3) to join a room!\n1 - Prequel Memes, 2 - Chonkers, 3 - Rare puppers";
-			//	SendMessageToClient(Clients[index].Connection, 2, greet);
-			//}
 
 			// Join the room
 			if (messageProtocol->messageHeader.commandId == 2)
 			{
 				std::string setRoom = "\nEnter \'LeaveRoom\' to leave room";
-				SendMessageToClient(Clients[index].Connection, 2, setRoom);
+				SendMessageToClient(Clients[index].Connection, 2, setRoom, "");
 
 				messageProtocol->JoinRoom(*messageProtocol->buffer);
 
@@ -351,7 +312,7 @@ void HandleClients(int index)
 				}
 				else {
 					std::string setGroup = "\nWrong group number! Try again!\n1 - Prequelmemes, 2 - Chonkers, 3 - Rarepuppers";
-					SendMessageToClient(Clients[index].Connection, 2, setGroup);
+					SendMessageToClient(Clients[index].Connection, 2, setGroup, "");
 				}
 			}
 
@@ -363,7 +324,7 @@ void HandleClients(int index)
 				Clients[index].roomName = "";
 
 				std::string setRoom = "\nEnter a number(1 - 3) to join a room!\n1 - Prequel Memes, 2 - Chonkers, 3 - Rare puppers";
-				SendMessageToClient(Clients[index].Connection, 2, setRoom);
+				SendMessageToClient(Clients[index].Connection, 2, setRoom, "");
 			}
 
 			// Send message
@@ -400,11 +361,15 @@ void SendToAuthentication(int id, std::string serializedString)
 }
 
 // Sends message to current client
-void SendMessageToClient(SOCKET theConnection, int id, std::string message)
+void SendMessageToClient(SOCKET theConnection, int id, std::string message, std::string username)
 {
 	Protocol* messageSendProtocol = new Protocol();
 	messageSendProtocol->CreateBuffer(512);
 	messageSendProtocol->messageHeader.commandId = id;
+	if (id == 5)
+	{
+		messageSendProtocol->messageBody.userName = username;
+	}
 	messageSendProtocol->messageBody.message = message;
 	messageSendProtocol->SendMessages(*messageSendProtocol->buffer, id);
 

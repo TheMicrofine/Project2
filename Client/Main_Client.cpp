@@ -96,10 +96,8 @@ int main(void)
 			send(Connection, &packet[0], packet.size(), 0);
 		}
 
-		Sleep(10);
+		Sleep(1000);
 	}
-
-
 
 	while (true)
 	{
@@ -156,8 +154,6 @@ void ClientThread()
 		}
 		else
 		{
-			// If header = ? validate credentials
-
 			Protocol* messageProtocol = new Protocol();
 			messageProtocol->CreateBuffer(512);
 
@@ -165,15 +161,19 @@ void ClientThread()
 			messageProtocol->ReadHeader(*messageProtocol->buffer);
 
 			messageProtocol->buffer->ResizeBuffer(messageProtocol->messageHeader.packetLength);
-
-			messageProtocol->ReceiveMessage(*messageProtocol->buffer);
-			std::cout << messageProtocol->messageBody.message << std::endl;
+			
 			commandID = messageProtocol->messageHeader.commandId;
 
 			if (commandID == 5)
 			{
+				messageProtocol->ReceiveUsername(*messageProtocol->buffer);
 				isValidCredentials = true;
+				userName = messageProtocol->messageBody.userName;
 			}
+
+			messageProtocol->ReceiveMessage(*messageProtocol->buffer);
+			std::cout << messageProtocol->messageBody.message << std::endl;
+		
 			delete messageProtocol;
 		}
 	}

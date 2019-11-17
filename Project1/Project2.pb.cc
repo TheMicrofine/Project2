@@ -215,20 +215,20 @@ const char descriptor_table_protodef_project2_2eproto[] PROTOBUF_SECTION_VARIABL
   "unt\022\021\n\trequestId\030\001 \002(\005\022\r\n\005email\030\002 \002(\t\022\031\n"
   "\021plaintextPassword\030\003 \002(\t\022\020\n\010userName\030\004 \002"
   "(\t\";\n\024CreateAccountSuccess\022\021\n\trequestId\030"
-  "\001 \002(\005\022\020\n\010userName\030\002 \002(\t\"\267\001\n\024CreateAccoun"
+  "\001 \002(\005\022\020\n\010userName\030\002 \002(\t\"\241\001\n\024CreateAccoun"
   "tFailure\022\021\n\trequestId\030\001 \002(\005\0225\n\006reason\030\002 "
   "\002(\0162%.project2.CreateAccountFailure.Reas"
-  "on\"U\n\006Reason\022\032\n\026ACCOUNT_ALREADY_EXISTS\020\000"
-  "\022\024\n\020INVALID_PASSWORD\020\001\022\031\n\025INTERNAL_SERVE"
-  "R_ERROR\020\002\"K\n\014Authenticate\022\021\n\trequestId\030\001"
-  " \002(\005\022\r\n\005email\030\002 \002(\t\022\031\n\021plaintextPassword"
-  "\030\003 \002(\t\"P\n\023AuthenticateSuccess\022\021\n\trequest"
-  "Id\030\001 \002(\005\022\020\n\010userName\030\002 \002(\t\022\024\n\014creationDa"
-  "te\030\003 \002(\t\"\234\001\n\023AuthenticateFailure\022\021\n\trequ"
-  "estId\030\001 \002(\005\0224\n\006reason\030\002 \002(\0162$.project2.A"
-  "uthenticateFailure.Reason\"<\n\006Reason\022\027\n\023I"
-  "NVALID_CREDENTIALS\020\000\022\031\n\025INTERNAL_SERVER_"
-  "ERROR\020\001"
+  "on\"\?\n\006Reason\022\032\n\026ACCOUNT_ALREADY_EXISTS\020\000"
+  "\022\031\n\025INTERNAL_SERVER_ERROR\020\001\"K\n\014Authentic"
+  "ate\022\021\n\trequestId\030\001 \002(\005\022\r\n\005email\030\002 \002(\t\022\031\n"
+  "\021plaintextPassword\030\003 \002(\t\"P\n\023Authenticate"
+  "Success\022\021\n\trequestId\030\001 \002(\005\022\020\n\010userName\030\002"
+  " \002(\t\022\024\n\014creationDate\030\003 \002(\t\"\265\001\n\023Authentic"
+  "ateFailure\022\021\n\trequestId\030\001 \002(\005\0224\n\006reason\030"
+  "\002 \002(\0162$.project2.AuthenticateFailure.Rea"
+  "son\"U\n\006Reason\022\032\n\026ACCOUNT_DOES_NOT_EXIST\020"
+  "\000\022\024\n\020INVALID_PASSWORD\020\001\022\031\n\025INTERNAL_SERV"
+  "ER_ERROR\020\002"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_project2_2eproto_deps[1] = {
 };
@@ -243,7 +243,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_pro
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_project2_2eproto_once;
 static bool descriptor_table_project2_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_project2_2eproto = {
-  &descriptor_table_project2_2eproto_initialized, descriptor_table_protodef_project2_2eproto, "project2.proto", 687,
+  &descriptor_table_project2_2eproto_initialized, descriptor_table_protodef_project2_2eproto, "project2.proto", 690,
   &descriptor_table_project2_2eproto_once, descriptor_table_project2_2eproto_sccs, descriptor_table_project2_2eproto_deps, 6, 0,
   schemas, file_default_instances, TableStruct_project2_2eproto::offsets,
   file_level_metadata_project2_2eproto, 6, file_level_enum_descriptors_project2_2eproto, file_level_service_descriptors_project2_2eproto,
@@ -260,7 +260,6 @@ bool CreateAccountFailure_Reason_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
-    case 2:
       return true;
     default:
       return false;
@@ -269,7 +268,6 @@ bool CreateAccountFailure_Reason_IsValid(int value) {
 
 #if (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
 constexpr CreateAccountFailure_Reason CreateAccountFailure::ACCOUNT_ALREADY_EXISTS;
-constexpr CreateAccountFailure_Reason CreateAccountFailure::INVALID_PASSWORD;
 constexpr CreateAccountFailure_Reason CreateAccountFailure::INTERNAL_SERVER_ERROR;
 constexpr CreateAccountFailure_Reason CreateAccountFailure::Reason_MIN;
 constexpr CreateAccountFailure_Reason CreateAccountFailure::Reason_MAX;
@@ -283,6 +281,7 @@ bool AuthenticateFailure_Reason_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
+    case 2:
       return true;
     default:
       return false;
@@ -290,7 +289,8 @@ bool AuthenticateFailure_Reason_IsValid(int value) {
 }
 
 #if (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
-constexpr AuthenticateFailure_Reason AuthenticateFailure::INVALID_CREDENTIALS;
+constexpr AuthenticateFailure_Reason AuthenticateFailure::ACCOUNT_DOES_NOT_EXIST;
+constexpr AuthenticateFailure_Reason AuthenticateFailure::INVALID_PASSWORD;
 constexpr AuthenticateFailure_Reason AuthenticateFailure::INTERNAL_SERVER_ERROR;
 constexpr AuthenticateFailure_Reason AuthenticateFailure::Reason_MIN;
 constexpr AuthenticateFailure_Reason AuthenticateFailure::Reason_MAX;

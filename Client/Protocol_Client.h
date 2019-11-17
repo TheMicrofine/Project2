@@ -31,11 +31,12 @@ public:
 
 	void SendRegister(Buffer& myBuffer);
 	void SendLogin(Buffer& myBuffer);
-	//void SendName(Buffer &myBuffer);
+
 	void JoinRoom(Buffer &myBuffer);
 	void LeaveRoom(Buffer &myBuffer);
 
 	void ReceiveMessage(Buffer &myBuffer);
+	void ReceiveUsername(Buffer &myBuffer);
 	void SendMessages(Buffer &myBuffer, int id);
 	void SendMessages(Buffer &myBuffer);
 

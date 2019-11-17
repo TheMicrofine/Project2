@@ -137,6 +137,15 @@ void Protocol::ReceiveMessage(Buffer &myBuffer)
 	}
 }
 
+void Protocol::ReceiveUsername(Buffer& myBuffer)
+{
+	int length = myBuffer.ReadInt32LE();
+	for (int i = 0; i <= length - 1; i++)
+	{
+		this->messageBody.userName += myBuffer.ReadChar8LE();
+	}
+}
+
 // Sends client name and message to server as a packet
 void Protocol::SendMessages(Buffer &myBuffer)
 {

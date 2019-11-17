@@ -90,11 +90,29 @@ void Protocol::ReceiveMessage(Buffer& myBuffer)
 void Protocol::SendMessages(Buffer& myBuffer, int id)
 {
 	this->messageHeader.commandId = id;
-	this->messageHeader.packetLength = sizeof(int) + sizeof(short) + sizeof(int) + this->messageBody.message.length();
+	if (id == 5)
+	{
+		this->messageHeader.packetLength = sizeof(int) + sizeof(short) + sizeof(int) + this->messageBody.userName.length() + sizeof(int) + this->messageBody.message.length();
+	}
+	else
+	{
+		this->messageHeader.packetLength = sizeof(int) + sizeof(short) + sizeof(int) + this->messageBody.message.length();
+	}
 
 	myBuffer.ResizeBuffer(this->messageHeader.packetLength);
 	myBuffer.WriteInt32LE(this->messageHeader.packetLength);
 	myBuffer.WriteShort16LE(this->messageHeader.commandId);
+
+	if (id == 5)
+	{
+		myBuffer.WriteInt32LE(this->messageBody.userName.length());
+		const  char* tempU = this->messageBody.userName.c_str();
+		for (int i = 0; tempU[i] != '\0'; i++)
+		{
+			myBuffer.WriteChar8LE(tempU[i]);
+		}
+	}
+
 	myBuffer.WriteInt32LE(this->messageBody.message.length());
 	const  char* temp = this->messageBody.message.c_str();
 	for (int i = 0; temp[i] != '\0'; i++)

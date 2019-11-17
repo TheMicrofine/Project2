@@ -87,8 +87,7 @@ namespace project2 {
 
 enum CreateAccountFailure_Reason : int {
   CreateAccountFailure_Reason_ACCOUNT_ALREADY_EXISTS = 0,
-  CreateAccountFailure_Reason_INVALID_PASSWORD = 1,
-  CreateAccountFailure_Reason_INTERNAL_SERVER_ERROR = 2
+  CreateAccountFailure_Reason_INTERNAL_SERVER_ERROR = 1
 };
 bool CreateAccountFailure_Reason_IsValid(int value);
 constexpr CreateAccountFailure_Reason CreateAccountFailure_Reason_Reason_MIN = CreateAccountFailure_Reason_ACCOUNT_ALREADY_EXISTS;
@@ -110,11 +109,12 @@ inline bool CreateAccountFailure_Reason_Parse(
     CreateAccountFailure_Reason_descriptor(), name, value);
 }
 enum AuthenticateFailure_Reason : int {
-  AuthenticateFailure_Reason_INVALID_CREDENTIALS = 0,
-  AuthenticateFailure_Reason_INTERNAL_SERVER_ERROR = 1
+  AuthenticateFailure_Reason_ACCOUNT_DOES_NOT_EXIST = 0,
+  AuthenticateFailure_Reason_INVALID_PASSWORD = 1,
+  AuthenticateFailure_Reason_INTERNAL_SERVER_ERROR = 2
 };
 bool AuthenticateFailure_Reason_IsValid(int value);
-constexpr AuthenticateFailure_Reason AuthenticateFailure_Reason_Reason_MIN = AuthenticateFailure_Reason_INVALID_CREDENTIALS;
+constexpr AuthenticateFailure_Reason AuthenticateFailure_Reason_Reason_MIN = AuthenticateFailure_Reason_ACCOUNT_DOES_NOT_EXIST;
 constexpr AuthenticateFailure_Reason AuthenticateFailure_Reason_Reason_MAX = AuthenticateFailure_Reason_INTERNAL_SERVER_ERROR;
 constexpr int AuthenticateFailure_Reason_Reason_ARRAYSIZE = AuthenticateFailure_Reason_Reason_MAX + 1;
 
@@ -621,8 +621,6 @@ class CreateAccountFailure :
   typedef CreateAccountFailure_Reason Reason;
   static constexpr Reason ACCOUNT_ALREADY_EXISTS =
     CreateAccountFailure_Reason_ACCOUNT_ALREADY_EXISTS;
-  static constexpr Reason INVALID_PASSWORD =
-    CreateAccountFailure_Reason_INVALID_PASSWORD;
   static constexpr Reason INTERNAL_SERVER_ERROR =
     CreateAccountFailure_Reason_INTERNAL_SERVER_ERROR;
   static inline bool Reason_IsValid(int value) {
@@ -1183,8 +1181,10 @@ class AuthenticateFailure :
   // nested types ----------------------------------------------------
 
   typedef AuthenticateFailure_Reason Reason;
-  static constexpr Reason INVALID_CREDENTIALS =
-    AuthenticateFailure_Reason_INVALID_CREDENTIALS;
+  static constexpr Reason ACCOUNT_DOES_NOT_EXIST =
+    AuthenticateFailure_Reason_ACCOUNT_DOES_NOT_EXIST;
+  static constexpr Reason INVALID_PASSWORD =
+    AuthenticateFailure_Reason_INVALID_PASSWORD;
   static constexpr Reason INTERNAL_SERVER_ERROR =
     AuthenticateFailure_Reason_INTERNAL_SERVER_ERROR;
   static inline bool Reason_IsValid(int value) {

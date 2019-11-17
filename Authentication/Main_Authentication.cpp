@@ -1,52 +1,3 @@
-#include "bcrypt/BCrypt.hpp"
-//#include <iostream>
-//
-//int main() {
-//	std::string right_password = "right_password";
-//	std::string wrong_password = "wrong_password";
-//
-//	std::cout << "generate salt... " << std::flush;
-//	std::string salt = BCrypt::generateSalt(12);
-//	std::cout << "done." << std::endl;
-//
-//	std::cout << "salt is: " << salt.c_str() << std::endl;
-//
-//	std::cout << "generate hash... " << std::flush;
-//	std::string hash = BCrypt::generateHash(right_password, salt);
-//	std::cout << "done." << std::endl;
-//
-//	std::cout << "hash is: " << hash.c_str() << std::endl;
-//
-//	std::cout << "checking right password: " << std::flush
-//		<< BCrypt::validatePassword(right_password, hash) << std::endl;
-//
-//	std::cout << "checking wrong password: " << std::flush
-//		<< BCrypt::validatePassword(wrong_password, hash) << std::endl;
-//
-//
-//	std::cout << "generate salt... " << std::flush;
-//	salt = BCrypt::generateSalt(12);
-//	std::cout << "done." << std::endl;
-//
-//	std::cout << "salt is: " << salt.c_str() << std::endl;
-//
-//	std::cout << "generate new hash... " << std::flush;
-//	hash = BCrypt::generateHash(wrong_password, salt);
-//	std::cout << "done." << std::endl;
-//
-//	std::cout << "hash is: " << hash.c_str() << std::endl;
-//
-//	std::cout << "checking right password: " << std::flush
-//		<< BCrypt::validatePassword(right_password, hash) << std::endl;
-//
-//	std::cout << "checking wrong password: " << std::flush
-//		<< BCrypt::validatePassword(wrong_password, hash) << std::endl;
-//
-//	system("pause");
-//	return 0;
-//}
-
-
 // Main_Authentication.cpp
 // Jenny Moon & Ryan O'Donnell
 // Authenticates logins and registers with the use of a database
@@ -55,9 +6,11 @@
 
 // Need to link with Ws2_32.lib
 #pragma comment (lib, "Ws2_32.lib")
-
 #include <WinSock2.h>
 #include <Ws2tcpip.h>
+
+#include <bcrypt/BCrypt.hpp>
+
 #include <iostream>
 #include <vector>
 
@@ -82,8 +35,6 @@ std::vector<int> lobby;
 int clientsCounter = 0;
 void HandleClient(int index);
 void SendToClient(SOCKET theConnection, int id, std::string message);
-//void SendMessageToAllInGroup(std::string groupName, int id, std::string message);
-//void SendMessageOthersInGroup(int clientIndex, std::string groupName, int id, std::string message);
 
 sql::Driver* driver;
 sql::Connection* con;
@@ -160,7 +111,7 @@ int RegisterAccount(std::string email, std::string password, std::string userNam
 		std::cout << " (MySQL error code: " << exception.getErrorCode();
 		std::cout << ", SQLState: " << exception.getSQLState() << ")" << std::endl;
 		system("Pause");
-		return 3;
+		return 2;
 	}
 }
 
@@ -216,7 +167,7 @@ int AuthenticateAccount(std::string email, std::string password)
 		std::cout << " (MySQL error code: " << exception.getErrorCode();
 		std::cout << ", SQLState: " << exception.getSQLState() << ")" << std::endl;
 		system("Pause");
-		return 2;
+		return 3;
 	}
 }
 
@@ -321,13 +272,12 @@ void HandleClient(int index)
 
 				std::cout << "Email: [" << newAccount->email().c_str() << "]\nPassword: [" << newAccount->plaintextpassword().c_str() << "]\nUsername: [" << newAccount->username().c_str() << "]" << std::endl;
 
-				//TODO: FIX THIS
 				int result = RegisterAccount(newAccount->email().c_str(), newAccount->plaintextpassword().c_str(), 
 					newAccount->username().c_str());
 
-				std::cout << "Result: " << result << std::endl;
+				std::cout << "Register Result: " << result << std::endl;
 
-				// 0 = Success, 1 = Account exists, 2 = Invalid password, 3 = Server error
+				// 0 = Success, 1 = Account exists, 2 = Server error
 				if (result == 0)
 				{
 					CreateAccountSuccess* successAccount = new CreateAccountSuccess();
@@ -348,10 +298,6 @@ void HandleClient(int index)
 					}
 					else if (result == 2)
 					{
-						failAccount->set_reason(failAccount->INVALID_PASSWORD);
-					}
-					else if (result == 3)
-					{
 						failAccount->set_reason(failAccount->INTERNAL_SERVER_ERROR);
 					}
 
@@ -369,15 +315,11 @@ void HandleClient(int index)
 
 				int result = AuthenticateAccount(loginAccount->email().c_str(), loginAccount->plaintextpassword().c_str());
 
-				std::cout << "Result: " << result << std::endl;
+				std::cout << "Authenticate Result: " << result << std::endl;
 
-				// 0 = Success, 1 = Account doesnt exist, 2 = Server error
+				// 0 = Success, 1 = Account doesnt exist, 2 = Invalid password, 3 = Server error
 				if (result == 0)
 				{
-					// Placeholders
-					loginUsername = loginAccount->email().c_str();
-					// creationDate = "2019-11-12";
-
 					AuthenticateSuccess* successAccount = new AuthenticateSuccess();
 					successAccount->set_requestid(loginAccount->requestid());
 					successAccount->set_username(loginUsername);
@@ -393,9 +335,13 @@ void HandleClient(int index)
 
 					if (result == 1)
 					{
-						failAccount->set_reason(failAccount->INVALID_CREDENTIALS);
+						failAccount->set_reason(failAccount->ACCOUNT_DOES_NOT_EXIST);
 					}
 					else if (result == 2)
+					{
+						failAccount->set_reason(failAccount->INVALID_PASSWORD);
+					}
+					else if (result == 3)
 					{
 						failAccount->set_reason(failAccount->INTERNAL_SERVER_ERROR);
 					}
