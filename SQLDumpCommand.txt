@@ -1,1 +1,0 @@
-.\mysqldump.exe -u root -p --databases project_2 > Project2.sql
